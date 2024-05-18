@@ -1,5 +1,4 @@
 import { Button } from "../components/ui/button";
-import boosterLogo from "../assets/booster.svg";
 import { Avatar } from "../components/ui/avatar";
 import { useWebAppData } from "../contexts";
 import { useMemo } from "react";
