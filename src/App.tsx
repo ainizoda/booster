@@ -1,7 +1,7 @@
-import { TelegramProvider } from "./contexts/telegram";
-import "./App.scss";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { TelegramProvider } from "./contexts";
 import { routerConfig } from "./routes";
+import "./App.scss";
 
 const router = createBrowserRouter(routerConfig);
 

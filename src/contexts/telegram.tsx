@@ -2,9 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { TelegramWebApps } from "telegram-webapps-types";
 import { paramsToObject } from "../utils";
 
-export const TelegramContext = createContext<TelegramWebApps.WebAppInitData>(
-  {}
-);
+const TelegramContext = createContext<TelegramWebApps.WebAppInitData>({});
 
 export const TelegramProvider = ({
   children,
@@ -13,9 +11,8 @@ export const TelegramProvider = ({
 }) => {
   const [data, setData] = useState({});
 
-  const webapp = Telegram.WebApp;
-
   useEffect(() => {
+    const webapp = Telegram.WebApp;
     webapp.ready();
     webapp.expand();
     setData(paramsToObject(webapp.initData));
