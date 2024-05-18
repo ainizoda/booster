@@ -5,5 +5,9 @@ type Props = {
   children: string;
 };
 export const Button: FC<Props> = ({ children, onClick }) => {
-  return <div onClick={onClick}>{children}</div>;
+  return (
+    <div className="" onClick={onClick}>
+      {children}
+    </div>
+  );
 };

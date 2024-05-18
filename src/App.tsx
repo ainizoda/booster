@@ -1,8 +1,5 @@
-import { useEffect } from "react";
-import { paramsToObject } from "./utils";
-
-import "./App.scss";
 import { useWebAppData } from "./contexts/telegram";
+import "./App.scss";
 
 function App() {
   const initData = useWebAppData();
