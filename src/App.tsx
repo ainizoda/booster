@@ -9,6 +9,7 @@ function App() {
 
   useEffect(() => {
     webapp.ready();
+    webapp.expand();
   });
 
   return (
