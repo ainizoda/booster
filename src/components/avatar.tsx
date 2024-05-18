@@ -14,7 +14,7 @@ export const Avatar: FC<Props> = ({ className }) => {
   return (
     <div
       className={cls(
-        "bg-[#266FF1] w-32 h-32 flex justify-center items-center rounded-full text-5xl",
+        "bg-[#266FF1] w-32 h-32 flex justify-center items-center rounded-full text-5xl font-bold",
         className
       )}
     >
