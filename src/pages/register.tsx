@@ -1,6 +1,6 @@
-import { Button } from "../components/ui/button";
-import { Avatar } from "../components/avatar";
-import { Input } from "../components/ui/input";
+import { Button } from "../components";
+import { Avatar } from "../components";
+import { Input } from "../components";
 
 export default function RegisterPage() {
   return (

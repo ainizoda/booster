@@ -1,4 +1,4 @@
-import { Button } from "../components/ui/button";
+import { Button } from "../components";
 import boosterLogo from "../assets/booster.svg";
 import { useNavigate } from "react-router";
 
