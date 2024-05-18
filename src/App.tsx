@@ -6,8 +6,11 @@ function App() {
     webapp.ready();
     webapp.expand();
     webapp.MainButton.show();
-    webapp.MainButton.text = "press"
-    alert(webapp.initData);
+    webapp.MainButton.text = "press";
+    webapp.MainButton.onClick = () => {
+      webapp.MainButton.text = "hi";
+      return webapp.MainButton;
+    };
   }, []);
 
   return (
