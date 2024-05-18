@@ -8,7 +8,7 @@ export default function WelcomePage() {
         <div className="flex justify-center">
           <img src={boosterLogo} alt="logo" />
         </div>
-        <div className="text-4xl mt-10">Welcome to Booster</div>
+        <div className="text-3xl mt-10">Welcome to Booster</div>
         <div className="mt-5 leading-8">
           Where every tap turns into treasure. Ready to make your mark and bloom
           with us? Let’s go!
