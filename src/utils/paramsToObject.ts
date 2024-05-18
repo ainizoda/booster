@@ -1,6 +1,6 @@
 import { TelegramWebApps } from "telegram-webapps-types";
 
-export function paramsToObject(params: string): TelegramWebApps.WebAppUser {
+export function paramsToObject(params: string): TelegramWebApps.WebAppInitData {
   const p = new URLSearchParams(params);
   const result: any = {};
   for (const [key, value] of p) {
