@@ -3,9 +3,13 @@ import ReactDOM from "react-dom/client";
 import "./index.scss";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { routerConfig } from "./routes.tsx";
+import { TelegramProvider } from "./contexts/telegram.tsx";
+import App from "./App.tsx";
 
-const router = createBrowserRouter(routerConfig);
+// const router = createBrowserRouter(routerConfig);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <RouterProvider router={router} />
+  <TelegramProvider>
+    <App />
+  </TelegramProvider>
 );

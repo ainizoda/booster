@@ -1,12 +1,15 @@
-import { useWebAppData } from "./contexts/telegram";
+import { TelegramProvider } from "./contexts/telegram";
 import "./App.scss";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { routerConfig } from "./routes";
+
+const router = createBrowserRouter(routerConfig);
 
 function App() {
-  const initData = useWebAppData();
   return (
-    <div className="text-3xl">
-      <h1>Welcome to Booster, {initData.user?.first_name}</h1>
-    </div>
+    <TelegramProvider>
+      <RouterProvider router={router} />
+    </TelegramProvider>
   );
 }
 

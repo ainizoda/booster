@@ -6,7 +6,11 @@ export const TelegramContext = createContext<TelegramWebApps.WebAppInitData>(
   {}
 );
 
-export const TelegramProvider = ({ children }: { children: JSX.Element }) => {
+export const TelegramProvider = ({
+  children,
+}: {
+  children: JSX.Element | JSX.Element[];
+}) => {
   const [data, setData] = useState({});
 
   const webapp = Telegram.WebApp;
