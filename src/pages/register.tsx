@@ -5,7 +5,7 @@ import { Input } from "../components/ui/input";
 export default function RegisterPage() {
   return (
     <div className="flex flex-col justify-center items-center h-screen">
-      <div className="mt-24 w-full">
+      <div className="mt-12 w-full">
         <div className="text-3xl text-center font-bold">
           Boom!
           <br />
