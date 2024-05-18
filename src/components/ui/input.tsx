@@ -16,7 +16,13 @@ export const Input: FC<Props> = ({ className, icon, ...props }) => {
         className
       )}
     >
-      <input className="w-full block bg-transparent" {...props} />
+      <input
+        className="w-full block bg-transparent"
+        autoComplete="off"
+        spellCheck="false"
+        autoCorrect="off"
+        {...props}
+      />
     </div>
   );
 };
