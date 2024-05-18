@@ -11,7 +11,7 @@ export default function WelcomePage() {
           <img src={boosterLogo} alt="logo" />
         </div>
         <div className="text-3xl mt-10">Welcome to Booster</div>
-        <div className="mt-5 leading-8 text-[#ffffffd8]">
+        <div className="mt-5 leading-7 text-[#ffffffd8]">
           Where every tap turns into treasure. Ready to make your mark and bloom
           with us? Let’s go!
         </div>
