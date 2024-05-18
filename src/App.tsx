@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import "./App.css";
+import { paramsToObject } from "./utils/paramsToObject";
 
 function App() {
   const webapp = Telegram.WebApp;
@@ -11,7 +12,7 @@ function App() {
 
   return (
     <div>
-      <h1>Hi, {webapp.initData}</h1>
+      <h1>Hi, {paramsToObject(webapp.initData).user?.first_name}</h1>
     </div>
   );
 }
