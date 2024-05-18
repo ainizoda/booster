@@ -11,7 +11,7 @@ export default function RegisterPage() {
     [user]
   );
   return (
-    <div className="flex flex-col justify-center items-center h-screen flex-wrap">
+    <div className="flex flex-col justify-center items-center h-screen">
       <div className="mt-24 w-full">
         <div className="text-3xl text-center">
           Boom!
