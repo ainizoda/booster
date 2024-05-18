@@ -11,7 +11,7 @@ export default function RegisterPage() {
     [user]
   );
   return (
-    <div className="flex flex-col items-center h-screen">
+    <div className="flex flex-col justify-center items-center h-screen">
       <div className="mt-24 w-full">
         <div className="text-3xl text-center">
           Boom!
@@ -26,9 +26,7 @@ export default function RegisterPage() {
           <Input placeholder="choose your nickname" />
         </div>
       </div>
-      <Button className="absolute bottom-0 mb-6 w-[calc(100%-48px)]">
-        Continue
-      </Button>
+      <Button className="mt-auto mb-6">Continue</Button>
     </div>
   );
 }
