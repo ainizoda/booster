@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import "./App.css";
 
 function App() {
   const webapp = Telegram.WebApp;
@@ -6,12 +7,11 @@ function App() {
   useEffect(() => {
     webapp.ready();
     webapp.expand();
-    alert(webapp.initData);
   }, []);
 
   return (
     <div>
-      <h1>Hi, {}</h1>
+      <h1>Hi, {webapp.initData}</h1>
     </div>
   );
 }
