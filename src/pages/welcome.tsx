@@ -9,12 +9,12 @@ export default function WelcomePage() {
           <img src={boosterLogo} alt="logo" />
         </div>
         <div className="text-4xl mt-10">Welcome to Booster</div>
-        <div className="mt-5">
+        <div className="mt-5 leading-8">
           Where every tap turns into treasure. Ready to make your mark and bloom
           with us? Let’s go!
         </div>
       </div>
-      <Button className="mt-auto mb-3">Create account</Button>
+      <Button className="mt-auto mb-6">Create account</Button>
     </div>
   );
 }
