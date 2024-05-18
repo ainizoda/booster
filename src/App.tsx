@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { TelegramProvider } from "./contexts";
 import { routerConfig } from "./routes";
@@ -8,7 +9,9 @@ const router = createBrowserRouter(routerConfig);
 function App() {
   return (
     <TelegramProvider>
-      <RouterProvider router={router} />
+      <Suspense fallback={<div>loading</div>}>
+        <RouterProvider router={router} />
+      </Suspense>
     </TelegramProvider>
   );
 }

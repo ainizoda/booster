@@ -1,7 +1,9 @@
 import { Button } from "../components/ui/button";
 import boosterLogo from "../assets/booster.svg";
+import { useNavigate } from "react-router";
 
 export default function WelcomePage() {
+  const navigate = useNavigate();
   return (
     <div className="flex flex-col justify-center items-center h-screen flex-wrap">
       <div className="mt-auto text-center">
@@ -14,7 +16,9 @@ export default function WelcomePage() {
           with us? Let’s go!
         </div>
       </div>
-      <Button className="mt-auto mb-6">Create account</Button>
+      <Button onClick={() => navigate("/register")} className="mt-auto mb-6">
+        Create account
+      </Button>
     </div>
   );
 }
