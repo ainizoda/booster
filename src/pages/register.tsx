@@ -21,7 +21,7 @@ export default function RegisterPage() {
         <div className="mt-10 flex justify-center">
           <Avatar name={shortName || "B"} />
         </div>
-        <div className="mt-20 leading-8 text-[#ffffffd8]">
+        <div className="mt-12 mb-12 leading-8 text-[#ffffffd8]">
           <div>&nbsp;Nickname</div>
           <Input placeholder="choose your nickname" />
         </div>
