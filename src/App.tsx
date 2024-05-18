@@ -1,16 +1,12 @@
 import { useEffect } from "react";
+
 function App() {
   const webapp = Telegram.WebApp;
 
   useEffect(() => {
     webapp.ready();
     webapp.expand();
-    webapp.MainButton.show();
-    webapp.MainButton.text = "press";
-    webapp.MainButton.onClick = () => {
-      webapp.MainButton.text = "hi";
-      return webapp.MainButton;
-    };
+    webapp.themeParams.bg_color = "#fff";
   }, []);
 
   return (
