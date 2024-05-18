@@ -6,7 +6,7 @@ function App() {
   useEffect(() => {
     webapp.ready();
     webapp.expand();
-    webapp.themeParams.bg_color = "#fff";
+    alert(webapp.initData);
   }, []);
 
   return (
