@@ -593,13 +593,6 @@
     "@types/prop-types" "*"
     csstype "^3.0.2"
 
-"@types/tailwindcss@^3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@types/tailwindcss/-/tailwindcss-3.1.0.tgz#1185e4b3437c6e0f19d6cc8cd42738a94fd7b64f"
-  integrity sha512-JxPzrm609hzvF4nmOI3StLjbBEP3WWQxDDJESqR1nh94h7gyyy3XSl0hn5RBMJ9mPudlLjtaXs5YEBtLw7CnPA==
-  dependencies:
-    tailwindcss "*"
-
 "@typescript-eslint/eslint-plugin@^7.2.0":
   version "7.9.0"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-7.9.0.tgz#093b96fc4e342226e65d5f18f9c87081e0b04a31"
@@ -2350,7 +2343,7 @@ supports-preserve-symlinks-flag@^1.0.0:
   resolved "https://registry.yarnpkg.com/supports-preserve-symlinks-flag/-/supports-preserve-symlinks-flag-1.0.0.tgz#6eda4bd344a3c94aea376d4cc31bc77311039e09"
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
 
-tailwindcss@*, tailwindcss@^3.4.3:
+tailwindcss@^3.4.3:
   version "3.4.3"
   resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.4.3.tgz#be48f5283df77dfced705451319a5dffb8621519"
   integrity sha512-U7sxQk/n397Bmx4JHbJx/iSOOv5G+II3f1kpLpY2QeUv5DcPdcTsYLlusZfq1NthHS1c1cZoyFmmkex1rzke0A==
