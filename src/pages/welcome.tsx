@@ -12,7 +12,7 @@ export default function WelcomePage() {
     if (!data.user?.id || !data.hash) return;
     alert(JSON.stringify({ id: data.user?.id?.toString(), hash: data.hash }));
     authenticate({ id: data.user?.id?.toString(), hash: data.hash }).then(
-      (res) => {
+      (res: any) => {
         localStorage.setItem("access_token", res.data.access_token);
         localStorage.setItem("refresh_token", res.data.refresh_token);
         navigate("/register");
