@@ -13,7 +13,6 @@ export default function WelcomePage() {
     if (!data.user?.id) {
       return;
     }
-    alert(JSON.stringify(data));
     authenticate({
       id: data.user?.id?.toString(),
       hash: data.hash,
