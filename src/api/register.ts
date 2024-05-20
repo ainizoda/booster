@@ -17,5 +17,5 @@ export const checkNickname = (name: string) =>
 export const updateUsername = (name: string) =>
   fetcher.put("/user/settings/username", { username: name });
 
-export const authenticate = (data: any) =>
+export const authenticate = (data: { data_check_string: string }) =>
   fetcher.post("/auth/telegram/authenticate", data);

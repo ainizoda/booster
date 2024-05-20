@@ -15,7 +15,6 @@ export const TelegramProvider = ({
     const webapp = Telegram.WebApp;
     webapp.ready();
     webapp.expand();
-    alert(webapp.initData);
     setData(paramsToObject(webapp.initData));
   }, []);
 

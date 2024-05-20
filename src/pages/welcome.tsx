@@ -13,20 +13,14 @@ export default function WelcomePage() {
     if (!data.user?.id) {
       return;
     }
-    authenticate({
-      id: data.user?.id?.toString(),
-      hash: data.hash,
-      first_name: data.user?.first_name,
-      last_name: data.user?.last_name,
-      username: data.user?.username,
-      photo_url: data.user?.photo_url,
-      auth_date: data.auth_date?.toString(),
-    }).then((res: any) => {
-      localStorage.setItem("access_token", res.data.access_token);
-      localStorage.setItem("refresh_token", res.data.refresh_token);
+    authenticate({ data_check_string: Telegram.WebApp.initData }).then(
+      (res: any) => {
+        localStorage.setItem("access_token", res.data.access_token);
+        localStorage.setItem("refresh_token", res.data.refresh_token);
 
-      navigate("/register");
-    });
+        navigate("/register");
+      }
+    );
   };
 
   return (
