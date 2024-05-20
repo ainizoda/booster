@@ -15,7 +15,7 @@ export default function WelcomePage() {
     }
 
     authenticate({
-      id: data.user?.id?.toString(),
+      id: data.user?.id,
       hash: data.hash,
       first_name: data.user?.first_name,
       last_name: data.user?.last_name,
