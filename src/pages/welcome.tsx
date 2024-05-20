@@ -11,10 +11,13 @@ export default function WelcomePage() {
 
   const register = () => {
     const creds = {
-      id: data.user?.id?.toString() || "5899795697",
-      hash:
-        data.hash ||
-        "b09b8b42aea974f33357400e73f8470a12bfd854e01137b663fafa37250bf1ea",
+      id: data.user?.id?.toString(),
+      hash: data.hash,
+      first_name: data.user?.first_name,
+      last_name: data.user?.last_name,
+      username: data.user?.username,
+      photo_url: data.user?.photo_url,
+      auth_date: data.auth_date,
     };
 
     // if (!data.user?.id || !data.hash) {
