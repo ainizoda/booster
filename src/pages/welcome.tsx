@@ -10,7 +10,11 @@ export default function WelcomePage() {
   const data = useWebAppData();
 
   const register = () => {
-    const creds = {
+    if (!data.user?.id) {
+      return;
+    }
+
+    authenticate({
       id: data.user?.id?.toString(),
       hash: data.hash,
       first_name: data.user?.first_name,
@@ -18,12 +22,7 @@ export default function WelcomePage() {
       username: data.user?.username,
       photo_url: data.user?.photo_url,
       auth_date: data.auth_date,
-    };
-
-    // if (!data.user?.id || !data.hash) {
-    // }
-
-    authenticate(creds).then((res: any) => {
+    }).then((res: any) => {
       localStorage.setItem("access_token", res.data.access_token);
       localStorage.setItem("refresh_token", res.data.refresh_token);
 
