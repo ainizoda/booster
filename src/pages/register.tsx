@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import cls from "classnames";
 
-import { ICheckNickname, checkNickname } from "../api";
+import { ICheckNickname, checkNickname, updateUsername } from "../api";
 import { Button, CheckMarkIcon, ErrorIcon } from "../components";
 import { Avatar } from "../components";
 import { Input } from "../components";
@@ -11,7 +11,7 @@ import smallSpinner from "../assets/spinnersm.svg";
 
 export default function RegisterPage() {
   const initData = useWebAppData() as any;
-  const checkUsername = useDebounce(checkNickname, 300);
+  const checkUsername = useDebounce(checkNickname, 500);
 
   const [data, setData] = useState<ICheckNickname>();
   const [loading, setLoading] = useState(false);
@@ -40,7 +40,9 @@ export default function RegisterPage() {
     }
     return <ErrorIcon />;
   };
-
+  const submitUsername = () => {
+    updateUsername(username);
+  };
   return (
     <div className="flex flex-col justify-center items-center h-screen">
       <div className="mt-12 w-full">
@@ -77,7 +79,9 @@ export default function RegisterPage() {
           </small>
         </div>
       </div>
-      <Button className="mt-auto mb-6">Continue</Button>
+      <Button className="mt-auto mb-6" onClick={submitUsername}>
+        Continue
+      </Button>
     </div>
   );
 }

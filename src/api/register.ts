@@ -13,3 +13,6 @@ export const checkNickname = (name: string) =>
     .catch((err) => {
       alert(JSON.stringify(err));
     });
+
+export const updateUsername = (name: string) =>
+  fetcher.put("/user/settings/username", { username: name });
