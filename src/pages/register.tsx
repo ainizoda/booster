@@ -15,14 +15,13 @@ export default function RegisterPage() {
 
   const [data, setData] = useState<ICheckNickname>();
   const [loading, setLoading] = useState(false);
-  const [username, setUsername] = useState(initData.user?.usernames || "init");
+  const [username, setUsername] = useState(initData.user?.username || "");
 
   const onUsernameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value.trim());
   };
 
   useEffect(() => {
-    alert(JSON.stringify(initData));
     if (username.length > 3) {
       setLoading(true);
       checkUsername(username).then((res) => {
