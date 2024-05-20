@@ -15,13 +15,13 @@ export default function WelcomePage() {
     }
 
     authenticate({
-      id: data.user?.id,
+      id: data.user?.id?.toString(),
       hash: data.hash,
       first_name: data.user?.first_name,
       last_name: data.user?.last_name,
       username: data.user?.username,
       photo_url: data.user?.photo_url,
-      auth_date: data.auth_date,
+      auth_date: data.auth_date?.toString(),
     }).then((res: any) => {
       localStorage.setItem("access_token", res.data.access_token);
       localStorage.setItem("refresh_token", res.data.refresh_token);
