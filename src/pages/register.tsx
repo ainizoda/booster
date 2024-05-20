@@ -10,12 +10,12 @@ import { useWebAppData } from "../contexts";
 import smallSpinner from "../assets/spinnersm.svg";
 
 export default function RegisterPage() {
-  const initData = useWebAppData();
+  const initData = useWebAppData() as any;
   const checkUsername = useDebounce(checkNickname, 300);
 
   const [data, setData] = useState<ICheckNickname>();
   const [loading, setLoading] = useState(false);
-  const [username, setUsername] = useState(initData.user?.username || "")
+  const [username, setUsername] = useState(initData.user?.username || "");
 
   const onUsernameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value.trim());
