@@ -9,4 +9,7 @@ export const checkNickname = (name: string) =>
     .get<ICheckNickname>(
       "/user/settings/username/check?username=" + encodeURIComponent(name)
     )
-    .then((res) => res.data);
+    .then((res) => res.data)
+    .catch((err) => {
+      alert(JSON.stringify(err));
+    });
