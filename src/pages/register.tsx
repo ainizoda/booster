@@ -1,8 +1,8 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import cls from "classnames";
 
 import { ICheckNickname, checkNickname } from "../api";
-import { Button } from "../components";
+import { Button, CheckMarkIcon, ErrorIcon } from "../components";
 import { Avatar } from "../components";
 import { Input } from "../components";
 import { useDebounce } from "../hooks/useDebounce";
@@ -11,15 +11,21 @@ import { useWebAppData } from "../contexts";
 export default function RegisterPage() {
   const initData = useWebAppData();
   const checkUsername = useDebounce(checkNickname, 300);
+
   const [data, setData] = useState<ICheckNickname>();
-  const [username, setUsername] = useState(initData.user?.usernames || "");
+  const [username, setUsername] = useState(initData.user?.usernames || "init");
 
   const onUsernameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setUsername(e.target.value);
-    checkUsername(e.target.value).then((res) => {
-      setData(res as any);
-    });
+    setUsername(e.target.value.trim());
   };
+
+  useEffect(() => {
+    if (username.length > 3) {
+      checkUsername(username).then((res) => {
+        setData(res as any);
+      });
+    }
+  }, [username]);
 
   return (
     <div className="flex flex-col justify-center items-center h-screen">
@@ -38,6 +44,16 @@ export default function RegisterPage() {
             placeholder="choose your nickname"
             onChange={onUsernameChange}
             value={username}
+            className={cls({
+              "border border-1": username.length > 3,
+              ...(data && {
+                "border-red-500": !data?.available,
+                "border-green-500": data?.available,
+              }),
+            })}
+            {...(data && {
+              icon: data?.available ? <CheckMarkIcon /> : <ErrorIcon />,
+            })}
           />
           <small
             className={cls({
