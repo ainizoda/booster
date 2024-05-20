@@ -7,7 +7,7 @@ import { useWebAppData } from "../contexts";
 
 export default function WelcomePage() {
   const navigate = useNavigate();
-  const data = useWebAppData();
+  const data = useWebAppData() as any;
 
   const register = () => {
     if (!data.user?.id) {
