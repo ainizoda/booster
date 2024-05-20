@@ -1,6 +1,7 @@
+import { useNavigate } from "react-router";
+
 import { Button } from "../components";
 import boosterLogo from "../assets/booster.svg";
-import { useNavigate } from "react-router";
 import { authenticate } from "../api";
 import { useWebAppData } from "../contexts";
 
@@ -9,16 +10,24 @@ export default function WelcomePage() {
   const data = useWebAppData();
 
   const register = () => {
-    if (!data.user?.id || !data.hash) return;
-    alert(JSON.stringify({ id: data.user?.id?.toString(), hash: data.hash }));
-    authenticate({ id: data.user?.id?.toString(), hash: data.hash }).then(
-      (res: any) => {
-        localStorage.setItem("access_token", res.data.access_token);
-        localStorage.setItem("refresh_token", res.data.refresh_token);
-        navigate("/register");
-      }
-    );
+    const creds = {
+      id: data.user?.id?.toString() || "5899795697",
+      hash:
+        data.hash ||
+        "b09b8b42aea974f33357400e73f8470a12bfd854e01137b663fafa37250bf1ea",
+    };
+
+    // if (!data.user?.id || !data.hash) {
+    // }
+
+    authenticate(creds).then((res: any) => {
+      localStorage.setItem("access_token", res.data.access_token);
+      localStorage.setItem("refresh_token", res.data.refresh_token);
+
+      navigate("/register");
+    });
   };
+
   return (
     <div className="flex flex-col justify-center items-center h-screen flex-wrap">
       <div className="mt-auto text-center">

@@ -8,4 +8,9 @@ const axiosInstance = axios.create({
   baseURL: apiURL,
 });
 
+axios.interceptors.request.use((req) => {
+  req.headers.Authorization = localStorage.getItem("access_token") || "";
+  return req;
+});
+
 export { axiosInstance as fetcher };
