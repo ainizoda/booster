@@ -17,7 +17,7 @@ export default function RegisterPage() {
   const onUsernameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
     checkUsername(e.target.value).then((res) => {
-      setData(res);
+      setData(res as any);
     });
   };
 
