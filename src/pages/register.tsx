@@ -15,14 +15,16 @@ export default function RegisterPage() {
 
   const [data, setData] = useState<ICheckNickname>();
   const [loading, setLoading] = useState(false);
-  const [username, setUsername] = useState(initData.user?.username || "");
+  const [username, setUsername] = useState<string>(
+    initData.user?.username || ""
+  );
 
   const onUsernameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value.trim());
   };
 
   useEffect(() => {
-    if (username.length > 3) {
+    if (username.length > 0) {
       setLoading(true);
       checkUsername(username).then((res) => {
         setLoading(false);
@@ -61,7 +63,7 @@ export default function RegisterPage() {
             onChange={onUsernameChange}
             value={username}
             className={cls({
-              "border border-1": username.length > 3,
+              "border border-1": username.length > 0,
               ...(data && {
                 "border-red-500": !data?.available,
                 "border-green-500": data?.available,
