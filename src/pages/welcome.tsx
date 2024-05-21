@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import { Button, Loader } from "../components";
 import boosterLogo from "../assets/booster.svg";
 import { authenticate } from "../api";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const initDataMock =
   "user=%7B%22id%22%3A5899795697%2C%22first_name%22%3A%22Bob%22%2C%22last_name%22%3A%22%22%2C%22username%22%3A%22akaibob%22%2C%22language_code%22%3A%22en%22%2C%22allows_write_to_pm%22%3Atrue%7D&chat_instance=-2669375549145693865&chat_type=group&auth_date=1716205328&hash=e040ff7a44dd7d8ee8d0507fc28afc84403eac6e05a6488bba9baeff856edd30";
@@ -22,6 +22,12 @@ export default function WelcomePage() {
       navigate("/register");
     });
   };
+
+  useEffect(() => {
+    if (window.localStorage.getItem("access_token")) {
+      navigate("/register");
+    }
+  }, []);
 
   if (loading) {
     return <Loader />;
