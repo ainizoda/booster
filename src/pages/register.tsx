@@ -8,10 +8,12 @@ import { Input } from "../components";
 import { useDebounce } from "../hooks/useDebounce";
 import { useWebAppData } from "../contexts";
 import smallSpinner from "../assets/spinnersm.svg";
+import { useNavigate } from "react-router";
 
 export default function RegisterPage() {
   const initData = useWebAppData() as any;
   const checkUsername = useDebounce(checkNickname, 500);
+  const navigate = useNavigate();
 
   const [data, setData] = useState<ICheckNickname>();
   const [loading, setLoading] = useState(false);
@@ -43,7 +45,11 @@ export default function RegisterPage() {
     return <ErrorIcon />;
   };
   const submitUsername = () => {
-    updateUsername(username);
+    if (data?.available) {
+      updateUsername(username).then(() => {
+        navigate("/loading-screen");
+      });
+    }
   };
   return (
     <div className="flex flex-col justify-center items-center h-screen">
