@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
 
 import { Button, Loader } from "../components";
@@ -22,12 +22,6 @@ export default function WelcomePage() {
       setLoading(false);
     });
   };
-
-  useEffect(() => {
-    if (localStorage.getItem("access_token")) {
-      navigate("/home");
-    }
-  }, []);
 
   if (loading) {
     return <Loader />;
