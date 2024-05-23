@@ -1,19 +1,23 @@
 import { FC, useEffect, useState } from "react";
-import { Navigate, useNavigate } from "react-router";
-import { me } from "../api";
-import { Loader } from "./ui";
+import { useNavigate, Navigate } from "react-router";
 
-export const AuthChecker: FC<{ children: JSX.Element }> = ({ children }) => {
+import { Loader } from "./ui";
+import { me } from "../api";
+
+export const AuthChecker: FC = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   async function checkToken() {
-    me().then((res) => {
-      if (res.data.id) {
+    me()
+      .then((res) => {
+        if (res.data?.id) {
+          navigate("/home");
+        }
+      })
+      .finally(() => {
         setLoading(false);
-        navigate("/home");
-      }
-    });
+      });
   }
 
   useEffect(() => {
@@ -24,5 +28,5 @@ export const AuthChecker: FC<{ children: JSX.Element }> = ({ children }) => {
     return <Loader />;
   }
 
-  return children;
+  return <Navigate to="/welcome" />;
 };
