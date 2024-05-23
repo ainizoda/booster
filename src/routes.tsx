@@ -15,6 +15,7 @@ export const routerConfig: RouteObject[] = [
     path: "/",
     element: <AuthChecker />,
   },
+  { path: "/welcome", element: <WelcomePage /> },
   { path: "/register", element: <RegisterPage /> },
   { path: "/loading-screen", element: <LoadingScreenPage /> },
   {
