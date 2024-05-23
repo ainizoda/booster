@@ -29,7 +29,7 @@ const ProgressItem: FC<{
         }
         return newState;
       });
-    }, 300);
+    }, 100);
 
     return () => clearInterval(interval);
   }, [start, onFinish]);
@@ -78,7 +78,6 @@ export default function LoadingScreenPage() {
             start={bars.points}
             onFinish={() => {
               setBars((prev) => ({ ...prev, points: false, bonuses: true }));
-              console.log("Points finished");
             }}
           />
           <ProgressItem

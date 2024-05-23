@@ -1,4 +1,5 @@
 import { ChangeEvent, useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import cls from "classnames";
 
 import { ICheckNickname, checkNickname, updateUsername } from "../api";
@@ -8,7 +9,6 @@ import { Input } from "../components";
 import { useDebounce } from "../hooks/useDebounce";
 import { useWebAppData } from "../contexts";
 import smallSpinner from "../assets/spinnersm.svg";
-import { useNavigate } from "react-router";
 
 export default function RegisterPage() {
   const initData = useWebAppData() as any;

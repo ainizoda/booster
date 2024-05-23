@@ -1,7 +1,7 @@
 import axios from "axios";
-import { refreshToken } from "./register";
+import { refreshToken } from "./auth";
 
-export * from "./register";
+export * from "./auth";
 
 export const apiURL = import.meta.env.VITE_API_URL;
 

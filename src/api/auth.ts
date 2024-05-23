@@ -26,3 +26,5 @@ export const refreshToken = (): Promise<string> =>
       refresh_token: localStorage.getItem("refresh_token"),
     })
     .then((res) => res.data.access_token);
+
+export const me = () => fetcher.get("/auth/me");
