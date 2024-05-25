@@ -4,7 +4,7 @@ import energyIcon from "../assets/energy.svg";
 import crashIcon from "../assets/crach_icon.svg";
 
 export default function HomePage() {
-  const data = useWebAppData();
+  const data = useWebAppData() as any;
   return (
     <div className="flex flex-col items-center h-full">
       <div className="mt-16 flex flex-col items-center">
