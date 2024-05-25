@@ -1,7 +1,6 @@
 import { lazy } from "react";
 import { RouteObject } from "react-router";
-import { Sidebar } from "./components/layouts";
-import { AuthChecker } from "./components";
+import { AuthChecker, Sidebar } from "./components";
 
 const WelcomePage = lazy(() => import("./pages/welcome"));
 const RegisterPage = lazy(() => import("./pages/register"));
