@@ -23,7 +23,7 @@ export default function HomePage() {
         <img src={crashIcon} alt="crash icon" />
         <div className="mt-2 text-xl">Play Crash</div>
       </div>
-      <div className="mt-auto text-center py-3 w-full bg-white rounded-md text-black hover:brightness-75 transition-all">
+      <div className="mt-auto mb-3 text-center py-3 w-full bg-white rounded-md text-black hover:brightness-75 transition-all">
         Start farming
       </div>
     </div>
