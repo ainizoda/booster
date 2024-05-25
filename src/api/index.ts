@@ -1,7 +1,8 @@
 import axios from "axios";
-import { refreshToken } from "./auth";
+import { auth } from "./auth";
 
 export * from "./auth";
+export * from "./farming";
 
 export const apiURL = import.meta.env.VITE_API_URL;
 
@@ -19,16 +20,19 @@ axiosInstance.interceptors.response.use(
   (response) => response,
   async (res) => {
     const originalRequest = res.config;
-    const responseStatus = res.response.status;
+    const responseStatus = res.response?.status;
 
     originalRequest._retry = true;
 
     if (responseStatus === 401) {
-      const newAccessToken = await refreshToken();
+      const oldToken = localStorage.getItem("refresh_token") || "";
+      const newAccessToken = await auth.refreshToken(oldToken);
       localStorage.setItem("access_token", newAccessToken);
       originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
       return axiosInstance(originalRequest);
     }
+
+    alert("server error");
     return res;
   }
 );

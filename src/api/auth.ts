@@ -4,7 +4,7 @@ export interface ICheckNickname {
   available: boolean;
   message: string;
 }
-export const checkNickname = (name: string) =>
+const checkNickname = (name: string) =>
   fetcher
     .get<ICheckNickname>(
       "/user/settings/username/check?username=" + encodeURIComponent(name)
@@ -14,17 +14,25 @@ export const checkNickname = (name: string) =>
       alert(JSON.stringify(err));
     });
 
-export const updateUsername = (name: string) =>
+const updateUsername = (name: string) =>
   fetcher.put("/user/settings/username", { username: name });
 
-export const authenticate = (data: { data_check_string: string }) =>
+const register = (data: { data_check_string: string }) =>
   fetcher.post("/auth/telegram/authenticate", data);
 
-export const refreshToken = (): Promise<string> =>
+const refreshToken = (oldToken: string): Promise<string> =>
   fetcher
     .post("/auth/token/refresh", {
-      refresh_token: localStorage.getItem("refresh_token"),
+      refresh_token: oldToken,
     })
     .then((res) => res.data.access_token);
 
-export const me = () => fetcher.get("/auth/me");
+const me = () => fetcher.get("/auth/me");
+
+export const auth = {
+  checkNickname,
+  updateUsername,
+  register,
+  refreshToken,
+  me,
+};

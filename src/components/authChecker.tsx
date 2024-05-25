@@ -2,22 +2,21 @@ import { FC, useEffect, useState } from "react";
 import { useNavigate, Navigate } from "react-router";
 
 import { Loader } from "./ui";
-import { me } from "../api";
+import { auth } from "../api";
 
 export const AuthChecker: FC = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   async function checkToken() {
-    me()
-      .then((res) => {
-        if (res.data?.id) {
-          navigate("/home");
-        }
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+    auth.me().then((res) => {
+      if (res.data?.id) {
+        navigate("/home");
+      }
+    })
+    .finally(() => {
+      setLoading(false);
+    });
   }
 
   useEffect(() => {

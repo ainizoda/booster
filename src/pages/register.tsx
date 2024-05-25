@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import cls from "classnames";
 
-import { ICheckNickname, checkNickname, updateUsername } from "../api";
+import { ICheckNickname, auth } from "../api";
 import { Button, CheckMarkIcon, ErrorIcon } from "../components";
 import { Avatar } from "../components";
 import { Input } from "../components";
@@ -12,7 +12,7 @@ import smallSpinner from "../assets/spinnersm.svg";
 
 export default function RegisterPage() {
   const initData = useWebAppData() as any;
-  const checkUsername = useDebounce(checkNickname, 500);
+  const checkUsername = useDebounce(auth.checkNickname, 500);
   const navigate = useNavigate();
 
   const [data, setData] = useState<ICheckNickname>();
@@ -46,7 +46,7 @@ export default function RegisterPage() {
   };
   const submitUsername = () => {
     if (data?.available) {
-      updateUsername(username).then(() => {
+      auth.updateUsername(username).then(() => {
         navigate("/loading-screen");
       });
     }
