@@ -10,6 +10,7 @@ export default function HomePage() {
   const data = useWebAppData() as any;
 
   const [status, setStatus] = useState<any>();
+  const [balance, setBalance] = useState("0.000");
   const [loading, setLoading] = useState({
     farming: false,
     balance: false,
@@ -33,17 +34,21 @@ export default function HomePage() {
     farming
       .getBalance()
       .then((res) => {
-        console.log(res.data);
+        setBalance(res?.data?.balance);
       })
       .finally(() => setLoading((prev) => ({ ...prev, balance: false })));
   };
 
   const action = () => {
     if (status?.time_left === undefined) {
-      return farming.start();
+      return farming.start().then(() => {
+        getStatus();
+      });
     }
     if (status?.collactable) {
-      return farming.collectReward();
+      return farming.claimReward().then(() => {
+        getStatus();
+      });
     }
   };
 
@@ -84,7 +89,7 @@ export default function HomePage() {
     return `${hours}h ${minutes}m`;
   };
 
-  const buttonClassName = "mt-auto mb-3 text-center p-3 w-full rounded-md";
+  const buttonClassName = "mt-auto mb-5 text-center p-3 w-full rounded-md";
 
   return (
     <div className="flex flex-col items-center h-full">
@@ -98,9 +103,9 @@ export default function HomePage() {
         <div className="pr-4">
           <EnergyIcon />
         </div>
-        <div className="font-orbitron text-6xl font-bold">0.000</div>
+        <div className="font-orbitron text-6xl font-bold">{balance}</div>
       </div>
-      <div className="w-full flex flex-col items-center py-4 bg-[#9945FF] rounded-md mt-20 hover:brightness-125 transition-all">
+      <div className="w-full flex flex-col items-center py-4 bg-[#9945FF] rounded-md mt-[8vh] hover:brightness-125 transition-all">
         <CrashIcon />
         <div className="mt-2 text-xl">Play Crash</div>
       </div>
