@@ -45,7 +45,7 @@ export default function HomePage() {
         getStatus();
       });
     }
-    if (status?.collactable) {
+    if (status?.collectable) {
       return farming.claimReward().then(() => {
         getStatus();
       });
@@ -122,22 +122,22 @@ export default function HomePage() {
             loading.farming || status?.time_left !== undefined,
           "text-[#9A9A9A]":
             (loading.farming || status?.time_left !== undefined) &&
-            !status?.collactable,
+            !status?.collectable,
           "bg-white text-black hover:brightness-75 transition-all":
             status?.time_left === undefined,
-          "bg-[#0D8345]": status?.collactable,
+          "bg-[#0D8345]": status?.collectable,
         })}
       >
         {loading.farming ? (
           <SpinnerSM />
         ) : status?.time_left !== undefined ? (
           <>
-            {status?.collactable ? "Claim" : "Farming"}
+            {status?.collectable ? "Claim" : "Farming"}
             <div className="flex gap-1 items-center">
               <EnergyXSIcon />
               <span>{earnedReward.toFixed(3)}</span>
             </div>
-            {!status?.collactable && (
+            {!status?.collectable && (
               <div className="absolute right-3">{timeLeft}</div>
             )}
           </>
