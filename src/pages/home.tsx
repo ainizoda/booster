@@ -5,12 +5,14 @@ import { farming } from "../api";
 import { Avatar, CrashIcon, EnergyIcon, EnergyXSIcon } from "../components";
 import { useWebAppData } from "../contexts";
 import { SpinnerSM } from "../components/icons/utils";
+import classNames from "classnames";
+import { toast } from "../lib";
 
 export default function HomePage() {
   const data = useWebAppData() as any;
 
   const [status, setStatus] = useState<any>();
-  const [balance, setBalance] = useState(null);
+  const [balance, setBalance] = useState<string>();
   const [loading, setLoading] = useState({
     farming: false,
     balance: false,
@@ -47,6 +49,7 @@ export default function HomePage() {
     }
     if (status?.collectable) {
       return farming.claimReward().then(() => {
+        toast("You got +57.00 Booster Points");
         getStatus();
       });
     }
@@ -57,7 +60,7 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
-    if (status?.time_left === undefined) return;
+    if (status?.time_left === undefined || status?.collectable) return;
 
     const interval = setInterval(() => {
       setEarnedReward((prev) => prev + 57 / (8 * 3600));
@@ -100,11 +103,19 @@ export default function HomePage() {
         </div>
       </div>
       {!loading.balance ? (
-        <div className="flex mt-9">
+        <div className="flex mt-9 text-ellipsis items-center">
           <div className="pr-4">
             <EnergyIcon />
           </div>
-          <div className="font-orbitron text-6xl font-bold">{balance}</div>
+          <div
+            className={classNames("font-orbitron font-bold text-ellipsis", {
+              "text-6xl": Number(balance?.length) < 8,
+              "text-5xl": Number(balance?.length) === 8,
+              "text-4xl": Number(balance?.length) > 8,
+            })}
+          >
+            {balance}
+          </div>
         </div>
       ) : (
         <div className="animate-pulse mt-9">
@@ -118,8 +129,9 @@ export default function HomePage() {
       <div
         onClick={action}
         className={cls(buttonClassName, {
-          "flex relative bg-[#5E5E5E] justify-center gap-3":
+          "flex relative justify-center gap-3":
             loading.farming || status?.time_left !== undefined,
+          "bg-[#5E5E5E] ": !status?.collectable,
           "text-[#9A9A9A]":
             (loading.farming || status?.time_left !== undefined) &&
             !status?.collectable,

@@ -3,6 +3,7 @@ import { auth } from "./auth";
 
 export * from "./auth";
 export * from "./farming";
+export * from "./settings";
 
 export const apiURL = import.meta.env.VITE_API_URL;
 
