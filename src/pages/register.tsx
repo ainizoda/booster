@@ -8,7 +8,7 @@ import { Avatar } from "../components";
 import { Input } from "../components";
 import { useDebounce } from "../hooks/useDebounce";
 import { useWebAppData } from "../contexts";
-import smallSpinner from "../assets/spinnersm.svg";
+import { SpinnerSM } from "../components/icons/utils";
 
 export default function RegisterPage() {
   const initData = useWebAppData() as any;
@@ -37,7 +37,7 @@ export default function RegisterPage() {
   }, [username]);
 
   const getInputIcon = () => {
-    if (loading) return <img src={smallSpinner} alt="loading" />;
+    if (loading) return <SpinnerSM />;
     if (!data) return;
     if (data.available) {
       return <CheckMarkIcon />;

@@ -4,13 +4,13 @@ import cls from "classnames";
 import { farming } from "../api";
 import { Avatar, CrashIcon, EnergyIcon, EnergyXSIcon } from "../components";
 import { useWebAppData } from "../contexts";
-import spinnersm from "../assets/spinnersm.svg";
+import { SpinnerSM } from "../components/icons/utils";
 
 export default function HomePage() {
   const data = useWebAppData() as any;
 
   const [status, setStatus] = useState<any>();
-  const [balance, setBalance] = useState("0.000");
+  const [balance, setBalance] = useState(null);
   const [loading, setLoading] = useState({
     farming: false,
     balance: false,
@@ -99,12 +99,18 @@ export default function HomePage() {
           {data?.user?.username || "didenkouniversal"}
         </div>
       </div>
-      <div className="flex mt-9">
-        <div className="pr-4">
-          <EnergyIcon />
+      {!loading.balance ? (
+        <div className="flex mt-9">
+          <div className="pr-4">
+            <EnergyIcon />
+          </div>
+          <div className="font-orbitron text-6xl font-bold">{balance}</div>
         </div>
-        <div className="font-orbitron text-6xl font-bold">{balance}</div>
-      </div>
+      ) : (
+        <div className="animate-pulse mt-9">
+          <div className="h-16 bg-gray-200 rounded-md dark:bg-gray-700 w-64"></div>
+        </div>
+      )}
       <div className="w-full flex flex-col items-center py-4 bg-[#9945FF] rounded-md mt-[8vh] hover:brightness-125 transition-all">
         <CrashIcon />
         <div className="mt-2 text-xl">Play Crash</div>
@@ -123,7 +129,7 @@ export default function HomePage() {
         })}
       >
         {loading.farming ? (
-          <img src={spinnersm} />
+          <SpinnerSM />
         ) : status?.time_left !== undefined ? (
           <>
             {status?.collactable ? "Claim" : "Farming"}
