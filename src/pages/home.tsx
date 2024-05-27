@@ -7,6 +7,7 @@ import { useWebAppData } from "../contexts";
 import { SpinnerSM } from "../components/icons/utils";
 import classNames from "classnames";
 import { toast } from "../lib";
+import { useNavigate } from "react-router";
 
 export default function HomePage() {
   const data = useWebAppData() as any;
@@ -93,6 +94,7 @@ export default function HomePage() {
   };
 
   const buttonClassName = "mt-auto mb-5 text-center p-3 w-full rounded-md";
+  const navigate = useNavigate();
 
   return (
     <div className="flex flex-col items-center h-full">
@@ -122,7 +124,10 @@ export default function HomePage() {
           <div className="h-16 bg-gray-200 rounded-md dark:bg-gray-700 w-64"></div>
         </div>
       )}
-      <div className="w-full flex flex-col items-center py-4 bg-[#9945FF] rounded-md mt-[8vh] hover:brightness-125 transition-all">
+      <div
+        onClick={() => navigate("/crash")}
+        className="w-full flex flex-col items-center py-4 bg-[#9945FF] rounded-md mt-[8vh] hover:brightness-125 transition-all"
+      >
         <CrashIcon />
         <div className="mt-2 text-xl">Play Crash</div>
       </div>

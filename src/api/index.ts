@@ -1,9 +1,11 @@
 import axios from "axios";
 import { auth } from "./auth";
+import { toast } from "../lib";
 
 export * from "./auth";
 export * from "./farming";
 export * from "./settings";
+export * from "./tasks";
 
 export const apiURL = import.meta.env.VITE_API_URL;
 
@@ -33,7 +35,7 @@ axiosInstance.interceptors.response.use(
       return axiosInstance(originalRequest);
     }
 
-    alert("server error");
+    toast("server error", { error: true });
     return res;
   }
 );

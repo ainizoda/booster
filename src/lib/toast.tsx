@@ -1,12 +1,17 @@
-import hotToast from "react-hot-toast";
+import hotToast, { ErrorIcon, ToastOptions } from "react-hot-toast";
 import { ToastCheckMark } from "../components";
 
-export const toast = (message: string) =>
+export const toast = (
+  message: string,
+  options?: ToastOptions & { error?: boolean }
+) =>
   hotToast(message, {
-    icon: <ToastCheckMark />,
+    icon: options?.error ? <ErrorIcon /> : <ToastCheckMark />,
     style: {
       borderRadius: "8px",
       background: "#282828",
       color: "#fff",
+      ...options?.style,
     },
+    ...options,
   });

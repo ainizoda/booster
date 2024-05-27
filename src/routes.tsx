@@ -8,6 +8,7 @@ const LoadingScreenPage = lazy(() => import("./pages/loadingScreen"));
 const HomePage = lazy(() => import("./pages/home"));
 const TasksPage = lazy(() => import("./pages/tasks"));
 const ReferralsPage = lazy(() => import("./pages/referrals"));
+const CrashPage = lazy(() => import("./pages/crash"));
 
 export const routerConfig: RouteObject[] = [
   {
@@ -17,6 +18,7 @@ export const routerConfig: RouteObject[] = [
   { path: "/welcome", element: <WelcomePage /> },
   { path: "/register", element: <RegisterPage /> },
   { path: "/loading-screen", element: <LoadingScreenPage /> },
+  { path: "/crash", element: <CrashPage /> },
   {
     element: <Sidebar />,
     children: [

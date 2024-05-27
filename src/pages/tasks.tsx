@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import boosterLogo from "../assets/booster.svg";
-import { missions } from "../api/tasks";
+import { missions } from "../api";
 import {
   ArrowRight,
   CheckMarkIcon,
@@ -40,11 +40,15 @@ export default function TasksPage() {
       return;
     }
     window.location.href = task.description;
-    // missions.collect({ mission_id: task.id });
+    missions.collect({ mission_id: task.id }).then(() => {
+      toast("task completed");
+    });
   };
 
   const claimWalletSetup = () => {
-    toast("task completed");
+    missions.collect({ mission_id: 1 }).then(() => {
+      toast("task completed");
+    });
     setParams({});
   };
 
