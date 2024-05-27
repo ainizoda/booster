@@ -32,7 +32,7 @@ export default function ReferralsPage() {
               </div>
             </div>
             <div>
-              <div>Your friends join Boosterk</div>
+              <div>Your friends join Booster</div>
               <div className="text-[#ddd] text-sm">
                 And start farming points
               </div>

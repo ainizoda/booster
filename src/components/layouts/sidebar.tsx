@@ -1,13 +1,22 @@
-import { FC } from "react";
+import { FC, useEffect, useRef } from "react";
 import { Outlet, useLocation, useNavigate } from "react-router";
 import { HomeIcon, ReferralsIcon, TasksIcon } from "../icons";
 
 export const Sidebar: FC = () => {
   const router = useLocation();
   const navigate = useNavigate();
+  const screenRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handleResize = () => {
+      screenRef?.current?.scrollTo(0, 1000);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   return (
     <div className="h-[90vh] overflow-hidden">
-      <div className="h-full overflow-auto">
+      <div className="h-full overflow-auto" ref={screenRef}>
         <Outlet />
       </div>
       <div className="fixed bottom-0 left-0 w-full px-14 py-4 bg-black">

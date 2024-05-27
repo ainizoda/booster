@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import { Suspense, useEffect } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { TelegramProvider } from "./contexts";
 import { routerConfig } from "./routes";
@@ -10,6 +10,14 @@ import { Toaster } from "react-hot-toast";
 const router = createBrowserRouter(routerConfig);
 
 function App() {
+  useEffect(() => {
+    const handleResize = () => {
+      // window.scrollTo(0, document.body.scrollHeight);
+    };
+    window.addEventListener("scroll", () => alert());
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   return (
     <TelegramProvider>
       <Toaster position="top-center" reverseOrder={false} />

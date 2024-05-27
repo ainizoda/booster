@@ -131,12 +131,12 @@ export default function HomePage() {
         className={cls(buttonClassName, {
           "flex relative justify-center gap-3":
             loading.farming || status?.time_left !== undefined,
-          "bg-[#5E5E5E] ": !status?.collectable,
+          "bg-[#5E5E5E] ": !status?.collectable || loading.farming,
           "text-[#9A9A9A]":
             (loading.farming || status?.time_left !== undefined) &&
             !status?.collectable,
           "bg-white text-black hover:brightness-75 transition-all":
-            status?.time_left === undefined,
+            status?.time_left === undefined && !loading.farming,
           "bg-[#0D8345]": status?.collectable,
         })}
       >

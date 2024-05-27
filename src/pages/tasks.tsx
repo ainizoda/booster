@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
-import classNames from "classnames";
 import boosterLogo from "../assets/booster.svg";
 import { missions } from "../api/tasks";
-import { ArrowRight, EnergyOutlined, WalletSetup } from "../components";
+import {
+  ArrowRight,
+  CheckMarkIcon,
+  EnergyOutlined,
+  WalletSetup,
+} from "../components";
 import { useSearchParams } from "react-router-dom";
 import { toast } from "../lib";
 
@@ -109,17 +113,7 @@ export default function TasksPage() {
                   </div>
                   <div className="text-sm pl-3">{task?.title}</div>
                 </div>
-                {task?.mission_completed ? (
-                  <div
-                    className={classNames(
-                      "bg-[#0D8345] text-sm rounded px-3 py-1"
-                    )}
-                  >
-                    Claim
-                  </div>
-                ) : (
-                  <ArrowRight />
-                )}
+                {task?.mission_completed ? <CheckMarkIcon /> : <ArrowRight />}
               </div>
             ))
           )}

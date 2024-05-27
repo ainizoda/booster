@@ -23,7 +23,7 @@ export const WalletSetup: FC<{ claim: () => void }> = ({ claim }) => {
       <div className="self-start mt-16 w-full">
         <div className="mb-2">&nbsp;Wallet address</div>
         <Input
-          placeholder="choose your nickname"
+          placeholder="your wallet"
           onChange={(e) => setAddress(e.target.value)}
           value={address}
           className={cls({
