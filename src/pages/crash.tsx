@@ -24,7 +24,7 @@ export default function CrashPage() {
   return (
     <div className="flex flex-col">
       <div className="bgpic h-72 w-full">
-        <div className="flex justify-between mt-8 px-5">
+        <div className="flex justify-between mt-8">
           <div>
             <div className="text-3xl">x25.42</div>
             <div className="text-gray-500 text-sm">CRASH</div>
@@ -46,19 +46,19 @@ export default function CrashPage() {
           </div>
         </div>
       </div>
-      <div className="flex gap-1 justify-center p-3">
+      <div className="flex gap-1 py-3 mt-3">
         <Tag color="blue" value="1.53x" />
         <Tag color="black" value="1x" />
         <Tag color="pink" value="4.37x" />
         <Tag color="pink" value="3.15x" />
         <Tag color="blue" value="1.21x" />
-        {/* <Tag color="green" value="7.31x" /> */}
+        <Tag color="green" value="7.31x" />
         <div className="bg-[#3E497D] w-20 rounded-md flex items-center justify-center gap-1 text-[10px]">
           <HistoryIcon />
           History
         </div>
       </div>
-      <div className="flex text-[#66D08A] text-[10px] items-center justify-between w-full mx-2 px-4 py-2 bg-[#66d08911] rounded-md">
+      <div className="bg-[#66d08911] text-[#66D08A] text-[10px] flex items-center justify-between w-full px-4 py-2 mt-2  rounded-md">
         <div className="flex gap-2 items-center">
           <ShieldIcon />
           <div>ROUND</div>
