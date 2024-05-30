@@ -23,8 +23,8 @@ export default function CrashPage() {
 
   return (
     <div className="flex flex-col">
-      <div className="bgpic h-72 w-full">
-        <div className="flex justify-between mt-8">
+      <div className="bgpic h-72 w-full mt-8">
+        <div className="flex justify-between mt-4">
           <div>
             <div className="text-3xl">x25.42</div>
             <div className="text-gray-500 text-sm">CRASH</div>
