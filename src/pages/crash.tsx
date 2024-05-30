@@ -58,7 +58,7 @@ export default function CrashPage() {
           History
         </div>
       </div>
-      <div className="bg-[#66d08911] text-[#66D08A] text-[10px] flex items-center justify-between w-full px-4 py-2 mt-2  rounded-md">
+      <div className="bg-[#66d08911] text-[#66D08A] text-[10px] flex items-center justify-between w-full px-4 py-2 mt-2 rounded-md">
         <div className="flex gap-2 items-center">
           <ShieldIcon />
           <div>ROUND</div>
