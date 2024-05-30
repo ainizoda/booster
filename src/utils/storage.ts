@@ -5,13 +5,13 @@ interface Storage<V = string> {
 
 export const storage: Storage = {
   get(key) {
-    const val = localStorage.getItem(key);
+    const val = sessionStorage.getItem(key);
     if (val === null) {
       throw new Error(`storage: value with key \`${key}\` not found`);
     }
     return val;
   },
   set(key, val) {
-    localStorage.setItem(key, val);
+    sessionStorage.setItem(key, val);
   },
 };

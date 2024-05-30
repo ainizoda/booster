@@ -35,6 +35,11 @@ const refreshToken = (oldToken: string): Promise<string> =>
     })
     .then((res) => res.data.access_token);
 
+const isRegistered = (userId: number) =>
+  fetcher.get("/auth/is_registered?user_id=" + userId, {
+    ignoreToken: true,
+  } as AxiosRequestConfig);
+
 const me = () => fetcher.get("/auth/me");
 
 export const auth = {
@@ -43,4 +48,5 @@ export const auth = {
   login,
   refreshToken,
   me,
+  isRegistered,
 };

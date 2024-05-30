@@ -12,14 +12,14 @@ import {
 import { apiURL } from "../api";
 
 export default function CrashPage() {
-  const { lastMessage } = useWebSocket(`${apiURL}/crash/ws`, {
+  const { lastJsonMessage } = useWebSocket(`${apiURL}/crash/ws`, {
     onOpen: () => console.log("opened"),
     shouldReconnect: () => true,
   });
 
   useEffect(() => {
-    console.log(lastMessage);
-  }, [lastMessage]);
+    console.log(lastJsonMessage);
+  }, [lastJsonMessage]);
 
   return (
     <div className="flex flex-col">

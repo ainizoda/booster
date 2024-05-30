@@ -100,9 +100,7 @@ export default function HomePage() {
     <div className="flex flex-col items-center h-full">
       <div className="mt-16 flex flex-col items-center">
         <Avatar />
-        <div className="text-2xl text-center mt-4">
-          {data?.user?.username || "didenkouniversal"}
-        </div>
+        <div className="text-2xl text-center mt-4">{data?.user?.username}</div>
       </div>
       {!loading.balance ? (
         <div className="flex mt-9 text-ellipsis items-center">

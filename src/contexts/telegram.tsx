@@ -18,7 +18,7 @@ export const TelegramProvider = ({
     const webapp = Telegram.WebApp;
     webapp.ready();
     webapp.expand();
-    setData(paramsToObject(webapp.initData));
+    setData(paramsToObject(webapp.initData || initDataMock));
   }, []);
 
   return (
