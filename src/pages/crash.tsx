@@ -1,6 +1,5 @@
-import useWebSocket from "react-use-websocket";
-import { apiURL } from "../api";
 import { useEffect } from "react";
+import useWebSocket from "react-use-websocket";
 import {
   CopyIcon,
   Energy,
@@ -10,6 +9,7 @@ import {
   Tag,
   UsersIcon,
 } from "../components";
+import { apiURL } from "../api";
 
 export default function CrashPage() {
   const { lastMessage } = useWebSocket(`${apiURL}/crash/ws`, {
@@ -22,7 +22,7 @@ export default function CrashPage() {
   }, [lastMessage]);
 
   return (
-    <div className="flex flex-col relative">
+    <div className="flex flex-col">
       <div className="bgpic h-72 w-full">
         <div className="flex justify-between mt-8 px-5">
           <div>
@@ -52,7 +52,7 @@ export default function CrashPage() {
         <Tag color="pink" value="4.37x" />
         <Tag color="pink" value="3.15x" />
         <Tag color="blue" value="1.21x" />
-        <Tag color="green" value="7.31x" />
+        {/* <Tag color="green" value="7.31x" /> */}
         <div className="bg-[#3E497D] w-20 rounded-md flex items-center justify-center gap-1 text-[10px]">
           <HistoryIcon />
           History
