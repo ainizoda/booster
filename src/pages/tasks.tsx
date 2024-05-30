@@ -5,6 +5,7 @@ import {
   ArrowRight,
   CheckMarkIcon,
   EnergyOutlined,
+  ShareEmail,
   WalletSetup,
 } from "../components";
 import { useSearchParams } from "react-router-dom";
@@ -34,6 +35,7 @@ export default function TasksPage() {
       return;
     }
     if (task.tag === "share_email") {
+      setParams({ option: "share_email" });
       return;
     }
     if (task.tag === "play_crash") {
@@ -41,12 +43,21 @@ export default function TasksPage() {
     }
     window.location.href = task.description;
     missions.collect({ mission_id: task.id }).then(() => {
-      toast("task completed");
+      getTasks();
     });
   };
 
   const claimWalletSetup = () => {
     missions.collect({ mission_id: 1 }).then(() => {
+      getTasks();
+      toast("task completed");
+    });
+    setParams({});
+  };
+
+  const claimShareEmail = () => {
+    missions.collect({ mission_id: 8 }).then(() => {
+      getTasks();
       toast("task completed");
     });
     setParams({});
@@ -62,9 +73,11 @@ export default function TasksPage() {
           </div>
         ) : (
           <div className="text-2xl text-center mt-4">
-            {params.get("option") === "wallet_setup"
+            {!params.get("option")
+              ? tasks.length + " tasks available"
+              : params.get("option") === "wallet_setup"
               ? "Share your wallet"
-              : tasks.length + " tasks available"}
+              : "Share your email"}
           </div>
         )}
       </div>
@@ -74,6 +87,8 @@ export default function TasksPage() {
       </div>
       {params.get("option") === "wallet_setup" ? (
         <WalletSetup claim={claimWalletSetup} />
+      ) : params.get("option") === "share_email" ? (
+        <ShareEmail claim={claimShareEmail} />
       ) : (
         <div className="mt-7 w-full">
           {loading ? (

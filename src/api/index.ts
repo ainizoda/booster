@@ -1,42 +1,45 @@
-import axios from "axios";
+import axios, { InternalAxiosRequestConfig } from "axios";
 import { auth } from "./auth";
 import { toast } from "../lib";
+import { storage } from "../utils";
 
 export * from "./auth";
 export * from "./farming";
 export * from "./settings";
 export * from "./tasks";
+export * from "./crash";
 
-export const apiURL = import.meta.env.VITE_API_URL;
+export const apiURL: string = import.meta.env.VITE_API_URL;
 
 const axiosInstance = axios.create({
   baseURL: apiURL,
 });
 
 axiosInstance.interceptors.request.use((req) => {
-  const token = localStorage.getItem("access_token");
-  req.headers.Authorization = token ? `Bearer ${token}` : "";
+  if (
+    !(req as InternalAxiosRequestConfig & { ignoreToken: boolean }).ignoreToken
+  ) {
+    const token = storage.get("access_token");
+    req.headers.Authorization = token ? `Bearer ${token}` : "";
+  }
   return req;
 });
 
 axiosInstance.interceptors.response.use(
   (response) => response,
-  async (res) => {
-    const originalRequest = res.config;
-    const responseStatus = res.response?.status;
-
-    originalRequest._retry = true;
-
-    if (responseStatus === 401) {
-      const oldToken = localStorage.getItem("refresh_token") || "";
+  async (error) => {
+    const originalRequest = error.config;
+    const responseStatus = error.response?.status;
+    if (responseStatus === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      const oldToken = storage.get("refresh_token");
       const newAccessToken = await auth.refreshToken(oldToken);
-      localStorage.setItem("access_token", newAccessToken);
+      storage.set("access_token", newAccessToken);
       originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
       return axiosInstance(originalRequest);
     }
-
     toast("server error", { error: true });
-    return res;
+    return error;
   }
 );
 

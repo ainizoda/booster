@@ -1,4 +1,6 @@
+import { AxiosRequestConfig } from "axios";
 import { fetcher } from ".";
+import { storage } from "../utils";
 
 export interface ICheckNickname {
   available: boolean;
@@ -9,16 +11,22 @@ const checkNickname = (name: string) =>
     .get<ICheckNickname>(
       "/user/settings/username/check?username=" + encodeURIComponent(name)
     )
-    .then((res) => res.data)
-    .catch((err) => {
-      alert(JSON.stringify(err));
-    });
+    .then((res) => res.data);
 
 const updateUsername = (name: string) =>
   fetcher.put("/user/settings/username", { username: name });
 
-const register = (data: { data_check_string: string }) =>
-  fetcher.post("/auth/telegram/authenticate", data);
+const login = (data: { data_check_string: string }) =>
+  fetcher
+    .post("/auth/telegram/authenticate", data, {
+      ignoreToken: true,
+    } as AxiosRequestConfig)
+    .then((res) => {
+      console.log(res);
+      storage.set("access_token", res.data.access_token);
+      storage.set("refresh_token", res.data.refresh_token);
+      return res;
+    });
 
 const refreshToken = (oldToken: string): Promise<string> =>
   fetcher
@@ -32,7 +40,7 @@ const me = () => fetcher.get("/auth/me");
 export const auth = {
   checkNickname,
   updateUsername,
-  register,
+  login,
   refreshToken,
   me,
 };

@@ -8,7 +8,7 @@ export const AuthChecker: FC = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
-  async function checkToken() {
+ function checkToken() {
     auth.me().then((res) => {
       if (res.data?.id) {
         navigate("/home");

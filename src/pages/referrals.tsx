@@ -1,15 +1,21 @@
 import { settings } from "../api";
-import { ListIcon } from "../components";
+import { ListIcon, SpinnerSM } from "../components";
 import refferals from "../assets/reffferals.png";
 import { toast } from "../lib";
+import { useState } from "react";
+import cls from "classnames";
+import { useThrottle } from "../hooks";
 
 export default function ReferralsPage() {
-  const getReferral = () => {
+  const [loading, setLoading] = useState(false);
+  const getReferral = useThrottle(() => {
+    setLoading(true);
     settings.getReferral().then((res) => {
       navigator.clipboard.writeText(res.data.referral_link);
       toast("Referral link copied");
+      setLoading(false);
     });
-  };
+  }, 3000);
   return (
     <div className="flex flex-col items-center h-full">
       <div className="mt-16 flex flex-col items-center">
@@ -48,9 +54,15 @@ export default function ReferralsPage() {
       </div>
       <div
         onClick={getReferral}
-        className="mt-auto mb-5 text-center p-3 w-full rounded-md bg-white text-black"
+        className={cls(
+          "mt-auto mb-5 text-center p-3 w-full rounded-md text-black",
+          {
+            "bg-white": !loading,
+            "bg-[#232323] flex justify-center": loading,
+          }
+        )}
       >
-        Invite friends (5 left)
+        {loading ? <SpinnerSM /> : "Invite friends (5 left)"}
       </div>
     </div>
   );
