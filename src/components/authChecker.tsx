@@ -4,7 +4,6 @@ import { useNavigate, Navigate } from "react-router";
 import { Loader } from "./ui";
 import { auth } from "../api";
 import { useWebAppData, useWebAppInitData } from "../contexts";
-import { storage } from "../utils";
 
 export const AuthChecker: FC = () => {
   const [loading, setLoading] = useState(true);
