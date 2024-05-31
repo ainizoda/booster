@@ -4,12 +4,14 @@ import { useNavigate, Navigate } from "react-router";
 import { Loader } from "./ui";
 import { auth } from "../api";
 import { useWebAppData, useWebAppInitData } from "../contexts";
+import { storage } from "../utils";
 
 export const AuthChecker: FC = () => {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const data = useWebAppData();
   const initData = useWebAppInitData();
+  alert(initData)
   async function checkToken() {
     const res = await auth.isRegistered(data.user?.id || 5899795697);
     if (res.data?.registered) {
