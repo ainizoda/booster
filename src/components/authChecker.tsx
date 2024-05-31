@@ -10,10 +10,10 @@ export const AuthChecker: FC = () => {
   const navigate = useNavigate();
   const data = useWebAppData();
   const initData = useWebAppInitData();
-  
+
   async function checkToken() {
-    alert(JSON.stringify(data.user))
-    const res = await auth.isRegistered(data.user?.id);
+    alert(JSON.stringify(data.user));
+    const res = await auth.isRegistered(data.user?.id || 7114850637);
     if (res.data?.registered) {
       auth
         .login({ data_check_string: initData })
