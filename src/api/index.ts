@@ -38,7 +38,12 @@ axiosInstance.interceptors.response.use(
       originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
       return axiosInstance(originalRequest);
     }
-    toast("server error", { error: true });
+    const errCode = error?.code?.toLowerCase() || "server error";
+    const errDetail = error?.response?.data?.detail;
+
+    toast(errCode + (errDetail ? ": " + errDetail : ""), {
+      error: true,
+    });
     return error;
   }
 );

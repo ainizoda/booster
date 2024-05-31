@@ -18,6 +18,8 @@ export default function WelcomePage() {
       })
       .then(() => {
         navigate("/register");
+      })
+      .finally(() => {
         setLoading(false);
       });
   };

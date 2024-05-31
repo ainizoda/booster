@@ -13,7 +13,7 @@ const CrashPage = lazy(() => import("./pages/crash"));
 export const routerConfig: RouteObject[] = [
   {
     path: "/",
-    element: <AuthChecker />,
+    element: <AuthChecker navigateOnSuccess="/home" />,
   },
   { path: "/welcome", element: <WelcomePage /> },
   { path: "/register", element: <RegisterPage /> },
@@ -22,7 +22,10 @@ export const routerConfig: RouteObject[] = [
   {
     element: <Sidebar />,
     children: [
-      { path: "/home", element: <HomePage /> },
+      {
+        path: "/home",
+        element: <HomePage />,
+      },
       { path: "/tasks", element: <TasksPage /> },
       { path: "/referrals", element: <ReferralsPage /> },
     ],
