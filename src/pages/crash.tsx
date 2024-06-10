@@ -347,7 +347,7 @@ export default function CrashPage() {
       </div>
       <div className="mt-3 text-[#4E5D8D]">
         <div>Enter amount</div>
-        <div className="flex w-full mt-3">
+        <div className="flex w-full mt-3 gap-1">
           <Input
             startIcon={<Energy size={22} color="#CDDBFF" />}
             className="bg-transparent border-[0.5px] border-slate-600"
