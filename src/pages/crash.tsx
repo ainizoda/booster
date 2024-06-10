@@ -217,9 +217,10 @@ export default function CrashPage() {
       if (cashedOut) {
         return;
       }
-      crash
-        .cashout(parseFloat(liveRatio))
-        .then((res) => toast(res.data?.detail));
+      crash.cashout(parseFloat(liveRatio)).then((res) => {
+        toast(res.data?.detail);
+        getBalance();
+      });
 
       setCashedOut(true);
       return;
@@ -228,6 +229,7 @@ export default function CrashPage() {
       getBets();
       if (res.status === 200) {
         setBetPlaced(true);
+        toast(res.data?.detail);
       }
     });
   };
@@ -242,10 +244,6 @@ export default function CrashPage() {
 
   const [bets, setBets] = useState<Bet[]>();
   const [cashout, setCashout] = useState({});
-
-  useEffect(() => {
-    console.log(cashout);
-  }, [cashout]);
 
   const getBets = () => {
     crash.getBets().then((res) => {
