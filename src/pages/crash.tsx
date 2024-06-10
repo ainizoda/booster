@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, MutableRefObject } from "react";
 import useWebSocket from "react-use-websocket";
 import {
   BetResultIcon,
@@ -19,17 +19,21 @@ import bettinUserImg from "../assets/betting_user.png";
 import classNames from "classnames";
 
 export default function CrashPage() {
-  const { lastJsonMessage } = useWebSocket(`${apiURL}/crash/ws`, {
+  const { lastJsonMessage } = useWebSocket<{
+    type: string;
+    final_ratio: string;
+  }>(`${apiURL}/crash/ws`, {
     onOpen: () => console.log("opened"),
     shouldReconnect: () => true,
   });
-  const { lastJsonMessage: gameProcess } = useWebSocket(
-    `${apiURL}/crash/listen-for-bets`,
-    {
-      onOpen: () => console.log("bets opened"),
-      shouldReconnect: () => true,
-    }
-  );
+  const { lastJsonMessage: gameProcess } = useWebSocket<{
+    bet?: string;
+    cashout_multiplier?: string;
+    user: string;
+  }>(`${apiURL}/crash/listen-for-bets`, {
+    onOpen: () => console.log("bets opened"),
+    shouldReconnect: () => true,
+  });
 
   const [liveRatio, setLiveRatio] = useState<string>("1.00");
   const [countdown, setCountdown] = useState<number | null>(null);
@@ -40,7 +44,7 @@ export default function CrashPage() {
   const { getVisited, setVisited } = useLocalStorage("visited");
 
   const calculateInitialRatioAndInterval = (elapsedTime: number) => {
-    let initialTime = 200; // Initial time increment in milliseconds
+    const initialTime = 200; // Initial time increment in milliseconds
     const timeDecreaseFactor = 0.995; // Time decrease factor
     let currentTime = initialTime;
     let multiplier = 1.0;
@@ -56,7 +60,10 @@ export default function CrashPage() {
     return { multiplier, currentTime };
   };
 
-  const updateLiveRatio = (currentTimeRef, timeDecreaseFactorRef) => {
+  const updateLiveRatio = (
+    currentTimeRef: MutableRefObject<number>,
+    timeDecreaseFactorRef: MutableRefObject<number>
+  ) => {
     setLiveRatio((prev) => {
       const newMultiplier = parseFloat((+prev + 0.01).toFixed(2));
       return newMultiplier.toString();
@@ -98,7 +105,7 @@ export default function CrashPage() {
     try {
       const response = await crash.getGameTiming();
 
-      const { current_time, betting_close_time } = response?.data;
+      const { current_time, betting_close_time } = response.data;
       const currentTime = new Date(current_time).getTime();
       const bettingCloseTime = new Date(betting_close_time).getTime();
       const elapsedTime = currentTime - bettingCloseTime;
@@ -378,13 +385,15 @@ export default function CrashPage() {
                 <div className="text-xs">{bet.amount}</div>
               </div>
               <div className="bg-[#7fca5d24] text-[#66D08A] text-xs rounded-md px-4 py-2 w-16 text-center">
-                x{cashout[bet.username] || liveRatio}
+                x{cashout[bet.username as keyof typeof cashout] || liveRatio}
               </div>
               <div className="flex items-center py-2 text-xs text-[#81E478] w-16">
                 <Energy size={16} color="#81E478" />
                 <div className="pr-1">
                   {(
-                    parseFloat(cashout[bet.username] || liveRatio) * bet.amount
+                    parseFloat(
+                      cashout[bet.username as keyof typeof cashout] || liveRatio
+                    ) * bet.amount
                   ).toFixed(2)}
                 </div>
                 <BetResultIcon />
