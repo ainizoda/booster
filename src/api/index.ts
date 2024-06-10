@@ -30,20 +30,27 @@ axiosInstance.interceptors.response.use(
   async (error) => {
     const originalRequest = error.config;
     const responseStatus = error.response?.status;
+
     if (responseStatus === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
+
       const oldToken = storage.get("refresh_token");
       const newAccessToken = await auth.refreshToken(oldToken);
       storage.set("access_token", newAccessToken);
       originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
+
       return axiosInstance(originalRequest);
     }
-    const errCode = error?.code?.toLowerCase() || "server error";
+
+    // const errCode = error?.code?.toLowerCase() || "server error";
     const errDetail = error?.response?.data?.detail;
 
-    toast(errCode + (errDetail ? ": " + errDetail : ""), {
-      error: true,
-    });
+    if (errDetail) {
+      toast(errDetail, {
+        error: true,
+      });
+    }
+
     return error;
   }
 );

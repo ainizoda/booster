@@ -10,8 +10,8 @@ export const Button: FC<Props> = ({ children, onClick, className }) => {
   return (
     <div
       className={cls(
-        "w-full text-center p-3 bg-white text-black rounded-md text-xl hover:opacity-75 cursor-pointer",
-        className
+        className,
+        "w-full text-center p-3 bg-white text-black rounded-md text-xl hover:opacity-75 cursor-pointer"
       )}
       onClick={onClick}
     >

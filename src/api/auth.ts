@@ -22,7 +22,6 @@ const login = (data: { data_check_string: string }) =>
       ignoreToken: true,
     } as AxiosRequestConfig)
     .then((res) => {
-      console.log(res);
       storage.set("access_token", res.data.access_token);
       storage.set("refresh_token", res.data.refresh_token);
       return res;
