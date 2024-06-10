@@ -165,7 +165,7 @@ export default function CrashPage() {
       setCashout({});
       setLiveRatio("1.00");
       getBets();
-      getBalance();
+      updateBalance();
     }
 
     console.log(lastJsonMessage);
@@ -219,7 +219,7 @@ export default function CrashPage() {
       }
       crash.cashout(parseFloat(liveRatio)).then((res) => {
         toast(res.data?.detail);
-        getBalance();
+        updateBalance();
       });
 
       setCashedOut(true);
@@ -230,6 +230,7 @@ export default function CrashPage() {
       if (res.status === 200) {
         setBetPlaced(true);
         toast(res.data?.detail);
+        updateBalance();
       }
     });
   };
@@ -254,7 +255,7 @@ export default function CrashPage() {
   const [balance, setBalance] = useState();
   const [lastGame, setLastGame] = useState<LastGameResults>();
 
-  const getBalance = () => {
+  const updateBalance = () => {
     farming.getBalance().then((res) => setBalance(res.data?.balance));
   };
 
@@ -264,7 +265,7 @@ export default function CrashPage() {
 
   useEffect(() => {
     getBets();
-    getBalance();
+    updateBalance();
     getLastGameResults();
   }, []);
 
