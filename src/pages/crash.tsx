@@ -375,19 +375,6 @@ export default function CrashPage() {
         </div>
       </div>
       <div className="mt-4 h-[35vh] overflow-auto">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim laudantium
-        repellat veritatis sunt aliquam animi, est veniam placeat delectus in,
-        nesciunt officiis totam nam aperiam neque ex numquam mollitia culpa.tium
-        repellat veritatis sunt aliquam animi, est veniam placeat delectus in,
-        nesciunt officiis totam nam aperiam neque ex numquam mollitia culpa.tium
-        repellat veritatis sunt aliquam animi, est veniam placeat delectus in,
-        nesciunt officiis totam nam aperiam neque ex numquam mollitia culpa.tium
-        repellat veritatis sunt aliquam animi, est veniam placeat delectus in,
-        nesciunt officiis totam nam aperiam neque ex numquam mollitia culpa.tium
-        repellat veritatis sunt aliquam animi, est veniam placeat delectus in,
-        nesciunt officiis totam nam aperiam neque ex numquam mollitia culpa.tium
-        repellat veritatis sunt aliquam animi, est veniam placeat delectus in,
-        nesciunt officiis totam nam aperiam neque ex numquam mollitia culpa.
         {bets?.map((bet) => (
           <div className="flex justify-between bg-[#253c4e3c] px-4 py-2 rounded-md mb-1">
             <div className="flex gap-2 items-center">
