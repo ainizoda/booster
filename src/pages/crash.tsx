@@ -15,7 +15,7 @@ import {
 } from "../components";
 import { Bet, LastGameResults, apiURL, crash, farming } from "../api";
 import { toast } from "../lib";
-import bettinUserImg from "../assets/betting_user.png";
+// import bettinUserImg from "../assets/betting_user.png";
 import classNames from "classnames";
 import { useNavigate } from "react-router";
 
