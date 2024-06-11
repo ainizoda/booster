@@ -17,6 +17,7 @@ import { toast } from "../lib";
 import { useLocalStorage } from "../hooks";
 import bettinUserImg from "../assets/betting_user.png";
 import classNames from "classnames";
+import { useNavigate } from "react-router";
 
 export default function CrashPage() {
   const { lastJsonMessage } = useWebSocket<{
@@ -166,9 +167,9 @@ export default function CrashPage() {
       setLiveRatio("1.00");
       getBets();
       updateBalance();
+      getLastGameResults();
     }
 
-    console.log(lastJsonMessage);
     return () => {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
@@ -276,8 +277,10 @@ export default function CrashPage() {
     }
   };
 
+  const navigate = useNavigate();
+
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col h-screen overflow-hidden">
       <div className="bgpic h-72 w-full">
         <div className="flex justify-between pt-12 px-2">
           <div>
@@ -371,7 +374,20 @@ export default function CrashPage() {
           </Button>
         </div>
       </div>
-      <div className="mt-8">
+      <div className="mt-4 h-[35vh] overflow-auto">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim laudantium
+        repellat veritatis sunt aliquam animi, est veniam placeat delectus in,
+        nesciunt officiis totam nam aperiam neque ex numquam mollitia culpa.tium
+        repellat veritatis sunt aliquam animi, est veniam placeat delectus in,
+        nesciunt officiis totam nam aperiam neque ex numquam mollitia culpa.tium
+        repellat veritatis sunt aliquam animi, est veniam placeat delectus in,
+        nesciunt officiis totam nam aperiam neque ex numquam mollitia culpa.tium
+        repellat veritatis sunt aliquam animi, est veniam placeat delectus in,
+        nesciunt officiis totam nam aperiam neque ex numquam mollitia culpa.tium
+        repellat veritatis sunt aliquam animi, est veniam placeat delectus in,
+        nesciunt officiis totam nam aperiam neque ex numquam mollitia culpa.tium
+        repellat veritatis sunt aliquam animi, est veniam placeat delectus in,
+        nesciunt officiis totam nam aperiam neque ex numquam mollitia culpa.
         {bets?.map((bet) => (
           <div className="flex justify-between bg-[#253c4e3c] px-4 py-2 rounded-md mb-1">
             <div className="flex gap-2 items-center">
@@ -400,6 +416,14 @@ export default function CrashPage() {
             </div>
           </div>
         ))}
+      </div>
+      <div className="fixed bottom-0 left-0 w-full py-3 px-4 border-t border-t-slate-500 bg-black">
+        <div
+          className="text-center border border-white rounded-md p-3 text-lg"
+          onClick={() => navigate("/home")}
+        >
+          Back
+        </div>
       </div>
     </div>
   );
