@@ -3,6 +3,7 @@ import boosterLogo from "../assets/booster.svg";
 import { missions } from "../api";
 import {
   ArrowRight,
+  Avatar,
   CheckMarkIcon,
   EnergyOutlined,
   ShareEmail,

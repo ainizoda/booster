@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef, MutableRefObject } from "react";
 import useWebSocket from "react-use-websocket";
 import {
+  Avatar,
   BetResultIcon,
   Button,
   CopyIcon,
@@ -177,7 +178,8 @@ export default function CrashPage() {
   }, [gameStarted]);
 
   useEffect(() => {
-    if (gameProcess?.bet) {
+    console.log(gameProcess);
+    if (gameProcess?.bet !== undefined) {
       getBets();
       return;
     }
@@ -367,7 +369,10 @@ export default function CrashPage() {
         {bets?.map((bet) => (
           <div className="flex justify-between bg-[#253c4e3c] px-4 py-2 rounded-md mb-1">
             <div className="flex gap-2 items-center">
-              <img src={bettinUserImg} />
+              <Avatar
+                className="w-5 h-5 text-xs rounded-sm"
+                name={bet?.username}
+              />
               <div className="text-xs text-[#94A8C8]">{bet.username}</div>
             </div>
             <div className="flex items-center justify-between gap-6">
