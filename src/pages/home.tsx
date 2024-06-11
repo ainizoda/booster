@@ -109,9 +109,9 @@ export default function HomePage() {
           </div>
           <div
             className={classNames("font-orbitron font-bold text-ellipsis", {
-              "text-6xl": Number(balance?.length) < 8,
-              "text-5xl": Number(balance?.length) === 8,
-              "text-4xl": Number(balance?.length) > 8,
+              "text-5xl": Number(balance?.length) < 8,
+              "text-4xl": Number(balance?.length) === 8,
+              "text-3xl": Number(balance?.length) > 8,
             })}
           >
             {balance}
@@ -124,7 +124,7 @@ export default function HomePage() {
       )}
       <div
         onClick={() => navigate("/crash")}
-        className="w-full flex flex-col items-center py-4 bg-[#9945FF] rounded-md mt-[5vh] hover:brightness-125 transition-all"
+        className="w-5/6 flex flex-col items-center py-2 bg-[#9945FF] rounded-lg mt-[5vh] hover:brightness-125 transition-all"
       >
         <CrashIcon />
         <div className="mt-2 text-xl">Play Crash</div>

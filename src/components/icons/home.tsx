@@ -1,7 +1,7 @@
 export const EnergyXSIcon = () => (
   <svg
-    width="12"
-    height="21"
+    width="7"
+    height="12"
     viewBox="0 0 12 21"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
