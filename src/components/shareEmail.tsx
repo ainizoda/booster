@@ -44,7 +44,7 @@ export const ShareEmail: FC<{ claim: () => void }> = ({ claim }) => {
           onChange={handleAddressChange}
           value={address}
           className={cls({
-            "border border-1": true,
+            "border border-1 mb-3": true,
             ...(address && {
               "border-red-500": !isAddressValid,
               "border-green-500": isAddressValid,
