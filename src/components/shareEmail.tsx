@@ -2,8 +2,6 @@ import { ChangeEvent, FC, useMemo, useState } from "react";
 import { Input } from "./ui";
 import cls from "classnames";
 import { CheckMarkIcon, ErrorIcon } from "./icons";
-import { toast } from "../lib";
-import { useDebounce } from "../hooks/useDebounce";
 import { settings } from "../api";
 
 export const ShareEmail: FC<{ claim: () => void }> = ({ claim }) => {
@@ -32,18 +30,9 @@ export const ShareEmail: FC<{ claim: () => void }> = ({ claim }) => {
     return <ErrorIcon />;
   };
 
-  const shareWallet = useDebounce(() => {
-    settings.shareWallet(address).then((res) => {
-      toast(res.data.message);
-    });
-  }, 800);
-
   const handleAddressChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.trim();
     setAddress(value);
-    if (value.length > 10) {
-      shareWallet();
-    }
   };
 
   return (
@@ -78,7 +67,17 @@ export const ShareEmail: FC<{ claim: () => void }> = ({ claim }) => {
           "bg-[#0D8345] text-[#fff]": isAddressValid,
           "bg-[#1C1C1E] text-[#A6A6A6]": !isAddressValid,
         })}
-        onClick={isAddressValid ? claim : () => {}}
+        onClick={
+          isAddressValid
+            ? () => {
+                settings.shareEmail(address).then((res) => {
+                  if (res.status === 200) {
+                    claim();
+                  }
+                });
+              }
+            : () => {}
+        }
       >
         Claim
       </div>

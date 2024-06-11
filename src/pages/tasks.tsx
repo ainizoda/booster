@@ -9,7 +9,8 @@ import {
   WalletSetup,
 } from "../components";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { toast } from "../lib";
+
+import hotToast from "react-hot-toast";
 
 export default function TasksPage() {
   const [tasks, setTasks] = useState([]);
@@ -52,20 +53,25 @@ export default function TasksPage() {
   const claimWalletSetup = () => {
     missions.collect({ mission_id: 1 }).then(() => {
       getTasks();
-      toast("task completed");
     });
     setParams({});
   };
 
   const claimShareEmail = () => {
-    missions.collect({ mission_id: 8 }).then((res) => {
+    missions.collect({ mission_id: 8 }).then(() => {
       getTasks();
-      if (res.data === 200) {
-        toast("task completed");
-      }
     });
     setParams({});
   };
+
+  useEffect(() => {
+    missions.collect({ mission_id: 9 }).then((res) => {
+      if (res.status !== 200) {
+        hotToast.dismiss();
+      }
+      getTasks();
+    });
+  }, []);
 
   return (
     <div className="flex flex-col items-center h-full">

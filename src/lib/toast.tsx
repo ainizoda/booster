@@ -6,7 +6,7 @@ export const toast = (
   options?: ToastOptions & { error?: boolean }
 ) => {
   hotToast.dismiss();
-  hotToast(message, {
+  return hotToast(message, {
     icon: options?.error ? <ErrorIcon /> : <ToastCheckMark />,
     style: {
       borderRadius: "8px",

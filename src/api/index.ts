@@ -26,7 +26,12 @@ axiosInstance.interceptors.request.use((req) => {
 });
 
 axiosInstance.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    if (response.data?.detail) {
+      toast(response.data?.detail);
+    }
+    return response;
+  },
   async (error) => {
     const originalRequest = error.config;
     const responseStatus = error.response?.status;

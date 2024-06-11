@@ -137,7 +137,7 @@ export default function CrashPage() {
           calculateInitialRatioAndInterval(elapsedTime);
 
         startGame(multiplier, initialInterval);
-        if (!getVisited()) {
+        if (!getVisited() && !betPlaced) {
           toast("Wait until next game");
           setVisited(true);
           return;
