@@ -98,8 +98,8 @@ export default function HomePage() {
 
   return (
     <div className="flex flex-col items-center h-full">
-      <div className="mt-16 flex flex-col items-center">
-        <Avatar />
+      <div className="mt-12 flex flex-col items-center">
+        <Avatar className="w-24 h-24 text-[40px]" />
         <div className="text-2xl text-center mt-4">{data?.user?.username}</div>
       </div>
       {!loading.balance ? (
@@ -124,7 +124,7 @@ export default function HomePage() {
       )}
       <div
         onClick={() => navigate("/crash")}
-        className="w-full flex flex-col items-center py-4 bg-[#9945FF] rounded-md mt-[8vh] hover:brightness-125 transition-all"
+        className="w-full flex flex-col items-center py-4 bg-[#9945FF] rounded-md mt-[5vh] hover:brightness-125 transition-all"
       >
         <CrashIcon />
         <div className="mt-2 text-xl">Play Crash</div>

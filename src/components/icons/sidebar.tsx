@@ -3,8 +3,8 @@ import { FC } from "react";
 export const HomeIcon: FC<{ active?: boolean }> = ({ active = false }) => {
   return active ? (
     <svg
-      width="23"
-      height="26"
+      width="17"
+      height="19"
       viewBox="0 0 23 26"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -20,8 +20,8 @@ export const HomeIcon: FC<{ active?: boolean }> = ({ active = false }) => {
     </svg>
   ) : (
     <svg
-      width="23"
-      height="26"
+      width="17"
+      height="19"
       viewBox="0 0 23 26"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -37,8 +37,8 @@ export const HomeIcon: FC<{ active?: boolean }> = ({ active = false }) => {
 export const TasksIcon: FC<{ active?: boolean }> = ({ active = false }) => {
   return active ? (
     <svg
-      width="22"
-      height="27"
+      width="17"
+      height="22"
       viewBox="0 0 22 27"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -54,8 +54,8 @@ export const TasksIcon: FC<{ active?: boolean }> = ({ active = false }) => {
     </svg>
   ) : (
     <svg
-      width="22"
-      height="27"
+      width="17"
+      height="22"
       viewBox="0 0 22 27"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -74,8 +74,8 @@ export const TasksIcon: FC<{ active?: boolean }> = ({ active = false }) => {
 export const ReferralsIcon: FC<{ active?: boolean }> = ({ active = false }) => {
   return active ? (
     <svg
-      width="33"
-      height="27"
+      width="24"
+      height="20"
       viewBox="0 0 33 27"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -109,8 +109,8 @@ export const ReferralsIcon: FC<{ active?: boolean }> = ({ active = false }) => {
     </svg>
   ) : (
     <svg
-      width="33"
-      height="27"
+      width="24"
+      height="20"
       viewBox="0 0 33 27"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

@@ -27,7 +27,7 @@ export const Sidebar: FC = () => {
         <Outlet />
       </div>
       {!keyboardVisible && (
-        <div className="fixed bottom-0 left-0 w-full px-14 py-4 bg-black">
+        <div className="fixed bottom-0 left-0 w-full px-14 pt-2 pb-4 bg-black">
           <div className="w-full flex items-center justify-between">
             <div
               className="flex flex-col items-center"

@@ -1,10 +1,10 @@
 import { FC, useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router";
+import { TelegramWebApps } from "telegram-webapps-types";
 
 import { Loader } from "./ui";
 import { auth } from "../api";
 import { useWebAppData, useWebAppInitData } from "../contexts";
-import { TelegramWebApps } from "telegram-webapps-types";
 
 type NavigateProps = {
   navigateOnSuccess?: string;
