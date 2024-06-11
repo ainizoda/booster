@@ -404,7 +404,7 @@ export default function CrashPage() {
           </div>
         ))}
       </div>
-      <div className="fixed bottom-0 left-0 w-full py-3 px-4 border-t border-t-slate-500 bg-black">
+      <div className="fixed bottom-0 left-0 w-full py-3 px-4 bg-black">
         <div
           className="text-center border border-white rounded-md p-3 text-lg"
           onClick={() => navigate("/home")}
