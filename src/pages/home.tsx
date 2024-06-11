@@ -124,7 +124,7 @@ export default function HomePage() {
       )}
       <div
         onClick={() => navigate("/crash")}
-        className="w-5/6 flex flex-col items-center py-2 bg-[#9945FF] rounded-lg mt-[5vh] hover:brightness-125 transition-all"
+        className="w-full flex flex-col items-center py-2 bg-[#9945FF] rounded-lg mt-[5vh] hover:brightness-125 transition-all"
       >
         <CrashIcon />
         <div className="mt-2 text-xl">Play Crash</div>
