@@ -28,7 +28,7 @@ export const WalletSetup: FC<{ claim: () => void }> = ({ claim }) => {
 
   return (
     <>
-      <div className="self-start mt-16 w-full">
+      <div className="self-start mt-8 w-full">
         <div className="mb-2">&nbsp;Wallet address</div>
         <Input
           placeholder="your wallet"
@@ -54,10 +54,13 @@ export const WalletSetup: FC<{ claim: () => void }> = ({ claim }) => {
         )}
       </div>
       <div
-        className={cls("mt-auto mb-5 text-center p-3 w-full rounded-md", {
-          "bg-[#0D8345] text-[#fff]": address.length > 10,
-          "bg-[#1C1C1E] text-[#A6A6A6]": address.length <= 10,
-        })}
+        className={cls(
+          "fixed bottom-20 w-[90%] text-center p-3 rounded-md",
+          {
+            "bg-[#0D8345] text-[#fff]": address.length > 10,
+            "bg-[#1C1C1E] text-[#A6A6A6]": address.length <= 10,
+          }
+        )}
         onClick={
           address.length > 10
             ? () => {

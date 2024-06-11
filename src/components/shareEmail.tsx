@@ -37,7 +37,7 @@ export const ShareEmail: FC<{ claim: () => void }> = ({ claim }) => {
 
   return (
     <>
-      <div className="self-start mt-16 w-full">
+      <div className="self-start mt-8 w-full">
         <div className="mb-2">&nbsp;Email</div>
         <Input
           placeholder="your email"
@@ -63,7 +63,7 @@ export const ShareEmail: FC<{ claim: () => void }> = ({ claim }) => {
         )}
       </div>
       <div
-        className={cls("mt-auto mb-5 text-center p-3 w-full rounded-md", {
+        className={cls("fixed bottom-20 w-[90%] text-center p-3 rounded-md", {
           "bg-[#0D8345] text-[#fff]": isAddressValid,
           "bg-[#1C1C1E] text-[#A6A6A6]": !isAddressValid,
         })}

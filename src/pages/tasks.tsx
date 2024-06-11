@@ -32,6 +32,9 @@ export default function TasksPage() {
   const navigate = useNavigate();
 
   const completeTask = (task: any) => {
+    if (task?.mission_completed) {
+      // return;
+    }
     if (task.tag === "wallet_setup") {
       setParams({ option: "wallet_setup" });
       return;
