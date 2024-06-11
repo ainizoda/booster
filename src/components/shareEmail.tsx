@@ -36,7 +36,7 @@ export const ShareEmail: FC<{ claim: () => void }> = ({ claim }) => {
     settings.shareWallet(address).then((res) => {
       toast(res.data.message);
     });
-  }, 400);
+  }, 800);
 
   const handleAddressChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.trim();

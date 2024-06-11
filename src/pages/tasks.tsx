@@ -8,7 +8,7 @@ import {
   ShareEmail,
   WalletSetup,
 } from "../components";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { toast } from "../lib";
 
 export default function TasksPage() {
@@ -28,6 +28,7 @@ export default function TasksPage() {
   }, []);
 
   const [params, setParams] = useSearchParams();
+  const navigate = useNavigate();
 
   const completeTask = (task: any) => {
     if (task.tag === "wallet_setup") {
@@ -39,6 +40,7 @@ export default function TasksPage() {
       return;
     }
     if (task.tag === "play_crash") {
+      navigate("/crash");
       return;
     }
     window.location.href = task.description;
@@ -56,9 +58,11 @@ export default function TasksPage() {
   };
 
   const claimShareEmail = () => {
-    missions.collect({ mission_id: 8 }).then(() => {
+    missions.collect({ mission_id: 8 }).then((res) => {
       getTasks();
-      toast("task completed");
+      if (res.data === 200) {
+        toast("task completed");
+      }
     });
     setParams({});
   };

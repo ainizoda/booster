@@ -349,12 +349,12 @@ export default function CrashPage() {
           <CopyIcon />
         </div>
       </div>
-      <div className="mt-3 text-[#4E5D8D]">
+      <div className="mt-4 text-[#4E5D8D]">
         <div>Enter amount</div>
-        <div className="flex w-full mt-3 gap-1">
+        <div className="flex w-full mt-1 gap-1">
           <Input
             startIcon={<Energy size={22} color="#CDDBFF" />}
-            className="bg-transparent border-[0.5px] border-slate-600"
+            className="bg-transparent border-[0.5px] border-slate-600 !py-0"
             placeholder="bet amount"
             value={betAmount}
             onChange={(e) => setBetAmount(e.target.value)}
@@ -363,7 +363,7 @@ export default function CrashPage() {
           />
           <Button
             onClick={placeBet}
-            className={classNames("!w-[200px] text-white", {
+            className={classNames("!w-[200px] text-white !py-2", {
               "!bg-[#9945FF]": !betPlaced,
               "!bg-[#ff4551]": betPlaced,
               "!bg-[#2db030]": betPlaced && gameStarted,

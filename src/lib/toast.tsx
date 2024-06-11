@@ -4,7 +4,8 @@ import { ToastCheckMark } from "../components";
 export const toast = (
   message: string,
   options?: ToastOptions & { error?: boolean }
-) =>
+) => {
+  hotToast.dismiss();
   hotToast(message, {
     icon: options?.error ? <ErrorIcon /> : <ToastCheckMark />,
     style: {
@@ -15,3 +16,4 @@ export const toast = (
     },
     ...options,
   });
+};
