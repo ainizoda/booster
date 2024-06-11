@@ -14,7 +14,6 @@ import {
 } from "../components";
 import { Bet, LastGameResults, apiURL, crash, farming } from "../api";
 import { toast } from "../lib";
-import { useLocalStorage } from "../hooks";
 import bettinUserImg from "../assets/betting_user.png";
 import classNames from "classnames";
 import { useNavigate } from "react-router";
@@ -42,7 +41,6 @@ export default function CrashPage() {
   const timeoutRef = useRef<number | null>(null);
   const countdownIntervalRef = useRef<number | null>(null);
   const [gameStarted, setGameStarted] = useState(false);
-  const { getVisited, setVisited } = useLocalStorage("visited");
 
   const calculateInitialRatioAndInterval = (elapsedTime: number) => {
     const initialTime = 200; // Initial time increment in milliseconds
@@ -137,20 +135,11 @@ export default function CrashPage() {
           calculateInitialRatioAndInterval(elapsedTime);
 
         startGame(multiplier, initialInterval);
-        if (!getVisited() && !betPlaced) {
-          toast("Wait until next game");
-          setVisited(true);
-          return;
-        }
       }
     } catch (error) {
       console.error("Error fetching game timing:", error);
     }
   };
-
-  useEffect(() => {
-    return () => setVisited(false);
-  }, []);
 
   useEffect(() => {
     fetchGameTiming();
