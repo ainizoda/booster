@@ -22,12 +22,12 @@ export const Sidebar: FC = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
   return (
-    <div className="h-[90vh] overflow-hidden">
+    <div className="h-screen overflow-hidden pb-20">
       <div className="h-full overflow-auto" ref={screenRef}>
         <Outlet />
       </div>
       {!keyboardVisible && (
-        <div className="fixed bottom-0 left-0 w-full px-14 pt-2 pb-4 bg-black">
+        <div className="fixed bottom-0 left-0 w-full px-14 py-4 bg-black">
           <div className="w-full flex items-center justify-between">
             <div
               className="flex flex-col items-center"

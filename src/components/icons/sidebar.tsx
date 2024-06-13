@@ -3,8 +3,8 @@ import { FC } from "react";
 export const HomeIcon: FC<{ active?: boolean }> = ({ active = false }) => {
   return active ? (
     <svg
-      width="17"
-      height="19"
+      width="18"
+      height="21"
       viewBox="0 0 23 26"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -20,8 +20,8 @@ export const HomeIcon: FC<{ active?: boolean }> = ({ active = false }) => {
     </svg>
   ) : (
     <svg
-      width="17"
-      height="19"
+      width="18"
+      height="21"
       viewBox="0 0 23 26"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

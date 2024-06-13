@@ -26,7 +26,7 @@ export default function ReferralsPage() {
       </div>
       <div className="mt-12 self-start">
         <div className="text-lg font-bold">How it works</div>
-        <div className="flex mt-6">
+        <div className="flex mt-6 pb-12">
           <div className="mt-4">
             <ListIcon />
           </div>

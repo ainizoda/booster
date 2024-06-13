@@ -174,11 +174,6 @@ export default function CrashPage() {
   }, [lastJsonMessage]);
 
   useEffect(() => {
-    console.log(gameStarted ? "Bet now!" : "shit, it's too late now");
-  }, [gameStarted]);
-
-  useEffect(() => {
-    console.log(gameProcess);
     if (gameProcess?.bet !== undefined) {
       getBets();
       return;
@@ -236,6 +231,8 @@ export default function CrashPage() {
   };
 
   const [bets, setBets] = useState<Bet[]>();
+  const [balance, setBalance] = useState();
+  const [lastGame, setLastGame] = useState<LastGameResults>();
   const [cashout, setCashout] = useState({});
 
   const getBets = () => {
@@ -243,9 +240,6 @@ export default function CrashPage() {
       setBets(res.data);
     });
   };
-
-  const [balance, setBalance] = useState();
-  const [lastGame, setLastGame] = useState<LastGameResults>();
 
   const updateBalance = () => {
     farming.getBalance().then((res) => setBalance(res.data?.balance));
