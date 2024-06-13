@@ -8,6 +8,7 @@ import { useThrottle } from "../hooks";
 
 export default function ReferralsPage() {
   const [loading, setLoading] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const getReferral = useThrottle(() => {
     setLoading(true);
     settings.getReferral().then((res) => {
@@ -19,7 +20,17 @@ export default function ReferralsPage() {
   return (
     <div className="flex flex-col items-center h-full">
       <div className="mt-16 flex flex-col items-center">
-        <img src={refferals} />
+        {!imageLoaded && (
+          <div className="animate-pulse mt-4">
+            <div className="h-20 bg-gray-200 rounded-md dark:bg-gray-700 w-20"></div>
+          </div>
+        )}
+        <img
+          src={refferals}
+          onLoad={() => {
+            setImageLoaded(true);
+          }}
+        />
         <div className="mt-4 text-4xl font-bold text-center leading-10">
           Invite friends. Earn points.
         </div>
