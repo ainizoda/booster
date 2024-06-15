@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, MutableRefObject } from "react";
+import { useEffect, useState, useRef, MutableRefObject, useMemo } from "react";
 import { useNavigate } from "react-router";
 import useWebSocket from "react-use-websocket";
 import classNames from "classnames";
@@ -287,6 +287,11 @@ export default function CrashPage() {
   const [showModal, setShowModal] = useState(false);
   const [selectedGame, setSelectedGame] = useState<Game>();
 
+  const lastGameRound = useMemo(
+    () => games?.find((game) => game.game_hash === lastGame?.hash)?.id,
+    [games, lastGame]
+  );
+
   return (
     <div className="flex flex-col h-screen overflow-hidden">
       <Modal
@@ -304,7 +309,11 @@ export default function CrashPage() {
           </span>
         </div>
         <div className="mt-5">
-          {selectedGame?.bets.length === 0 && <div className="text-center text-sm text-slate-200 py-4">No bets found in this round</div>}
+          {selectedGame?.bets.length === 0 && (
+            <div className="text-center text-sm text-slate-200 py-4">
+              No bets found in this round
+            </div>
+          )}
           {selectedGame?.bets?.map((bet) => (
             <div
               key={bet.user_id}
@@ -433,7 +442,7 @@ export default function CrashPage() {
         <div className="flex gap-2 items-center">
           <ShieldIcon />
           <div>ROUND</div>
-          <div>#5144409</div>
+          <div>#{lastGameRound}</div>
         </div>
         <div className="flex gap-2" onClick={() => copy(lastGame?.hash)}>
           <div>

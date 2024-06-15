@@ -32,7 +32,7 @@ export const Modal: FC<Props> = ({
       className="absolute bg-[#0000009b] w-screen h-screen left-0 top-0 flex justify-center items-center z-[100]"
     >
       <div
-        className={cls(className, "relative w-[95%] p-3 rounded-md bg-[#101519] h-fit")}
+        className={cls(className, "relative w-[95%] p-3 rounded-md bg-[#0c0f12] h-fit")}
       >
         <div className="flex text-xl justify-between mb-4">
           <div>{title}</div>
