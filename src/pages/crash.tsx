@@ -353,7 +353,7 @@ export default function CrashPage() {
                   <div className="flex items-center py-2 text-xs text-[#d06666] w-16">
                     <Energy size={16} color=" #d06666" />
                     <div className="pr-1">
-                      -{(bet.cash_out_multiplier * bet.amount).toFixed(2)}
+                      -{(bet.amount).toFixed(2)}
                     </div>
                   </div>
                 )}
