@@ -1,23 +1,25 @@
 import { useEffect, useState, useRef, MutableRefObject } from "react";
+import { useNavigate } from "react-router";
 import useWebSocket from "react-use-websocket";
+import classNames from "classnames";
 import {
   Avatar,
   BetResultIcon,
   Button,
   CopyIcon,
   Energy,
-  HistoryIcon,
   Input,
+  Modal,
   RectIcon,
   ShieldIcon,
   Tag,
   UsersIcon,
 } from "../components";
-import { Bet, LastGameResults, apiURL, crash, farming } from "../api";
+import { Bet, Game, LastGameResults, apiURL, crash, farming } from "../api";
 import { toast } from "../lib";
 // import bettinUserImg from "../assets/betting_user.png";
-import classNames from "classnames";
-import { useNavigate } from "react-router";
+import "swiper/css";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 export default function CrashPage() {
   const { lastJsonMessage } = useWebSocket<{
@@ -98,7 +100,17 @@ export default function CrashPage() {
       clearInterval(intervalRef.current);
       intervalRef.current = null;
     }
+
+    setGameStarted(false);
+    setBetPlaced(false);
+    setCashedOut(false);
+    setCashout({});
+    setLiveRatio("1.00");
     fetchGameTiming();
+    getBets();
+    updateBalance();
+    getLastGameResults();
+    getGames();
   };
 
   const fetchGameTiming = async () => {
@@ -150,14 +162,6 @@ export default function CrashPage() {
       setGameStarted(true);
     } else if (lastJsonMessage?.type === "end") {
       stopGame(lastJsonMessage?.final_ratio);
-      setGameStarted(false);
-      setBetPlaced(false);
-      setCashedOut(false);
-      setCashout({});
-      setLiveRatio("1.00");
-      getBets();
-      updateBalance();
-      getLastGameResults();
     }
 
     return () => {
@@ -234,6 +238,7 @@ export default function CrashPage() {
   const [balance, setBalance] = useState();
   const [lastGame, setLastGame] = useState<LastGameResults>();
   const [cashout, setCashout] = useState({});
+  const [games, setGames] = useState<Game[] | null>(null);
 
   const getBets = () => {
     crash.getBets().then((res) => {
@@ -248,24 +253,106 @@ export default function CrashPage() {
   const getLastGameResults = () => {
     crash.getLastGameResults().then((res) => setLastGame(res.data));
   };
+  const getGames = () => {
+    crash.getGames(10).then((res) => setGames(res.data));
+  };
 
   useEffect(() => {
     getBets();
     updateBalance();
     getLastGameResults();
+    getGames();
   }, []);
-
-  const copyHash = () => {
-    if (lastGame?.hash) {
-      navigator.clipboard.writeText(lastGame?.hash);
-      toast("Hash copied successfully", { icon: <CopyIcon /> });
-    }
+  // console.log(games)
+  const copy = (hash?: string) => {
+    if (!hash) return;
+    navigator.clipboard.writeText(hash);
+    toast("Hash copied successfully", { icon: <CopyIcon /> });
   };
 
   const navigate = useNavigate();
 
+  const getTagColor = (ratio: number) => {
+    if (ratio < 1.4) return "black";
+    if (ratio < 4) return "blue";
+    if (ratio < 7) return "pink";
+    return "green";
+  };
+
+  const showGameInfo = (game: Game) => {
+    setSelectedGame(game);
+    setShowModal(true);
+  };
+
+  const [showModal, setShowModal] = useState(false);
+  const [selectedGame, setSelectedGame] = useState<Game>();
+
   return (
     <div className="flex flex-col h-screen overflow-hidden">
+      <Modal
+        title={`Round #${selectedGame?.id}`}
+        open={showModal}
+        onClose={() => setShowModal(false)}
+      >
+        <div>
+          Hash:{" "}
+          <span
+            className="text-xs break-words text-slate-400 hover:text-slate-300 cursor-pointer"
+            onClick={() => copy(selectedGame?.game_hash)}
+          >
+            {selectedGame?.game_hash}
+          </span>
+        </div>
+        <div className="mt-5">
+          {selectedGame?.bets.length === 0 && <div className="text-center text-sm text-slate-200 py-4">No bets found in this round</div>}
+          {selectedGame?.bets?.map((bet) => (
+            <div
+              key={bet.user_id}
+              className="flex justify-between bg-[#1929353c] px-4 py-2 rounded-md mb-1"
+            >
+              <div className="flex gap-2 items-center">
+                <Avatar
+                  className="w-5 h-5 text-xs rounded-sm"
+                  name={bet?.username}
+                />
+                <div className="text-xs text-[#94A8C8]">{bet.username}</div>
+              </div>
+              <div className="flex items-center justify-between gap-6">
+                <div className="flex items-center">
+                  <Energy size={16} />
+                  <div className="text-xs">{bet.amount}</div>
+                </div>
+
+                {bet?.result === "win" ? (
+                  <div className="bg-[#7fca5d24] text-[#66D08A] text-xs rounded-md px-4 py-2 w-16 text-center">
+                    x{bet.cash_out_multiplier}
+                  </div>
+                ) : (
+                  <div className="bg-[#ca5d5d24] text-[#d06666] text-xs rounded-md px-4 py-2 w-16 text-center">
+                    lose
+                  </div>
+                )}
+                {bet.result === "win" ? (
+                  <div className="flex items-center py-2 text-xs text-[#81E478] w-16">
+                    <Energy size={16} color="#81E478" />
+                    <div className="pr-1">
+                      {(bet.cash_out_multiplier * bet.amount).toFixed(2)}
+                    </div>
+                    <BetResultIcon />
+                  </div>
+                ) : (
+                  <div className="flex items-center py-2 text-xs text-[#d06666] w-16">
+                    <Energy size={16} color=" #d06666" />
+                    <div className="pr-1">
+                      -{(bet.cash_out_multiplier * bet.amount).toFixed(2)}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </Modal>
       <div className="bgpic h-72 w-full">
         <div className="flex justify-between pt-12 px-2">
           <div>
@@ -306,16 +393,41 @@ export default function CrashPage() {
         </div>
       </div>
       <div className="flex gap-1 py-3 mt-3">
-        <Tag color="blue" value="1.53x" />
-        <Tag color="black" value="1x" />
-        <Tag color="pink" value="4.37x" />
-        <Tag color="pink" value="3.15x" />
-        <Tag color="blue" value="1.21x" />
-        <Tag color="green" value="7.31x" />
-        <div className="bg-[#3E497D] w-20 rounded-md flex items-center justify-center gap-1 text-[10px]">
-          <HistoryIcon />
-          History
-        </div>
+        {games ? (
+          <Swiper
+            slidesPerView={6.8}
+            fadeEffect={{ crossFade: true }}
+            spaceBetween={4}
+          >
+            {games.map((game) => (
+              <SwiperSlide
+                key={game.id}
+                onClick={() => {
+                  showGameInfo(game);
+                }}
+              >
+                <Tag
+                  value={game.result.toFixed(2)}
+                  color={getTagColor(game.result)}
+                />
+              </SwiperSlide>
+            ))}
+            {/* <div className="bg-[#3E497D] w-20 rounded-md flex items-center justify-center gap-1 text-[10px]">
+              <HistoryIcon />
+              History
+            </div> */}
+          </Swiper>
+        ) : (
+          <div className="animate-pulse flex gap-1">
+            <div className="h-8 bg-gray-200 rounded-md dark:bg-gray-700 w-12"></div>
+            <div className="h-8 bg-gray-200 rounded-md dark:bg-gray-700 w-12"></div>
+            <div className="h-8 bg-gray-200 rounded-md dark:bg-gray-700 w-12"></div>
+            <div className="h-8 bg-gray-200 rounded-md dark:bg-gray-700 w-12"></div>
+            <div className="h-8 bg-gray-200 rounded-md dark:bg-gray-700 w-12"></div>
+            <div className="h-8 bg-gray-200 rounded-md dark:bg-gray-700 w-12"></div>
+            <div className="h-8 bg-gray-200 rounded-md dark:bg-gray-700 w-12"></div>
+          </div>
+        )}
       </div>
       <div className="bg-[#66d08911] text-[#66D08A] text-[10px] flex items-center justify-between w-full px-4 py-2 mt-2 rounded-md">
         <div className="flex gap-2 items-center">
@@ -323,7 +435,7 @@ export default function CrashPage() {
           <div>ROUND</div>
           <div>#5144409</div>
         </div>
-        <div className="flex gap-2" onClick={copyHash}>
+        <div className="flex gap-2" onClick={() => copy(lastGame?.hash)}>
           <div>
             {lastGame?.hash.slice(0, 5)} ...{" "}
             {lastGame?.hash.slice(
@@ -361,7 +473,10 @@ export default function CrashPage() {
       </div>
       <div className="mt-4 h-[35vh] overflow-auto">
         {bets?.map((bet) => (
-          <div className="flex justify-between bg-[#253c4e3c] px-4 py-2 rounded-md mb-1">
+          <div
+            key={bet.user_id}
+            className="flex justify-between bg-[#253c4e3c] px-4 py-2 rounded-md mb-1"
+          >
             <div className="flex gap-2 items-center">
               <Avatar
                 className="w-5 h-5 text-xs rounded-sm"

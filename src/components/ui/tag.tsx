@@ -21,7 +21,7 @@ export const Tag: FC<Props> = ({ color, value }) => {
         color: colors[color],
         backgroundColor: color === "black" ? "#ffffff18" : colors[color] + "40",
       }}
-      className="w-11 p-2 rounded-md text-xs flex justify-center items-center"
+      className="py-2 px-3 rounded-md text-xs flex justify-center items-center cursor-default hover:opacity-85"
     >
       {value}
     </div>

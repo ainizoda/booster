@@ -1,3 +1,4 @@
+import hotToast from "react-hot-toast";
 import axios, { InternalAxiosRequestConfig } from "axios";
 import { auth } from "./auth";
 import { toast } from "../lib";
@@ -50,10 +51,8 @@ axiosInstance.interceptors.response.use(
     // const errCode = error?.code?.toLowerCase() || "server error";
     const errDetail = error?.response?.data?.detail;
 
-    if (errDetail) {
-      toast(errDetail, {
-        error: true,
-      });
+    if (typeof errDetail === "string") {
+      toast(errDetail, { error: true });
     }
 
     return error;

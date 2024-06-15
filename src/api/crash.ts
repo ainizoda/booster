@@ -33,6 +33,28 @@ export interface LastGameResults {
 const getLastGameResults = () =>
   fetcher.get<LastGameResults>("/crash/last_game_result");
 
+export interface Game {
+  id: number;
+  game_hash: string;
+  result: number;
+  start_time: Date;
+  end_time: Date;
+  bets: {
+    id: number;
+    user_id: string;
+    username: string;
+    amount: number;
+    time: Date;
+    hash: string;
+    cash_out_multiplier: number;
+    cash_out_datetime: Date;
+    result: "win" | "lose";
+  }[];
+  total_bet_amount: number;
+}
+const getGames = (limit: number = 5) =>
+  fetcher.get<Game[]>("/crash/games?limit=" + limit);
+
 export const crash = {
   placeBet,
   getGameTiming,
@@ -40,4 +62,5 @@ export const crash = {
   cancelBet,
   cashout,
   getLastGameResults,
+  getGames,
 };

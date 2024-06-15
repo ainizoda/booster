@@ -23,6 +23,7 @@
     "react-use-websocket": "^4.8.1",
     "sass": "^1.77.2",
     "serve": "^14.2.3",
+    "swiper": "^11.1.4",
     "tailwindcss": "^3.4.3",
     "telegram-webapps-types": "^1.0.5"
   },
