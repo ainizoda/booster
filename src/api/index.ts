@@ -1,4 +1,4 @@
-import hotToast from "react-hot-toast";
+
 import axios, { InternalAxiosRequestConfig } from "axios";
 import { auth } from "./auth";
 import { toast } from "../lib";
