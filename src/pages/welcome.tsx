@@ -36,7 +36,7 @@ export default function WelcomePage() {
         </div>
         <div className="text-3xl mt-10 font-bold">Welcome to Booster</div>
         <div className="mt-5 leading-7 text-[#ffffffd8]">
-          Where every tap turns into treasure. Ready to make your mark and bloom
+          Where every tap turns into treasure. Ready to make your mark
           with us? Let’s go!
         </div>
       </div>
