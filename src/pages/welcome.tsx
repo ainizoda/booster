@@ -1,16 +1,15 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router";
 
 import { Button, Loader } from "../components";
 import boosterLogo from "../assets/booster.svg";
 import { auth } from "../api";
-import { useWebAppData, useWebAppInitData } from "../contexts";
+import { useWebAppInitData } from "../contexts";
 
 export default function WelcomePage() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const initData = useWebAppInitData();
-  const data = useWebAppData();
   const register = () => {
     setLoading(true);
     auth
@@ -24,10 +23,6 @@ export default function WelcomePage() {
         setLoading(false);
       });
   };
-
-  useEffect(() => {
-    alert("startparam: " + data.start_param);
-  }, [data]);
 
   if (loading) {
     return <Loader />;
