@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import cls from "classnames";
 
-import { farming } from "../api";
+import { farming, settings } from "../api";
 import { Avatar, CrashIcon, EnergyIcon, EnergyXSIcon } from "../components";
 import { useWebAppData } from "../contexts";
 import { SpinnerSM } from "../components/icons/utils";
@@ -86,10 +86,12 @@ export default function HomePage() {
       setTimeLeft(formatTime(status.time_left));
     }
   }, [status?.time_left]);
-  
+
   const webData = useWebAppData();
   useEffect(() => {
-    alert("startparam: " + webData.start_param);
+    if (webData.start_param) {
+      settings.putReferral(webData.start_param);
+    }
   }, [webData]);
 
   const formatTime = (seconds: number): string => {
