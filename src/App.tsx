@@ -13,7 +13,7 @@ const router = createBrowserRouter(routerConfig);
 function App() {
   const data = useWebAppData();
   useEffect(() => {
-    console.log(data?.start_param);
+    alert(data?.start_param);
   }, [data]);
   return (
     <TelegramProvider>
