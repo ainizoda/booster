@@ -1,15 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 
 import { Button, Loader } from "../components";
 import boosterLogo from "../assets/booster.svg";
 import { auth } from "../api";
-import { useWebAppInitData } from "../contexts";
+import { useWebAppData, useWebAppInitData } from "../contexts";
 
 export default function WelcomePage() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const initData = useWebAppInitData();
+  const data = useWebAppData();
   const register = () => {
     setLoading(true);
     auth
@@ -24,6 +25,10 @@ export default function WelcomePage() {
       });
   };
 
+  useEffect(() => {
+    alert("startparam: " + data.start_param);
+  }, [data]);
+
   if (loading) {
     return <Loader />;
   }
@@ -36,8 +41,8 @@ export default function WelcomePage() {
         </div>
         <div className="text-3xl mt-10 font-bold">Welcome to Booster</div>
         <div className="mt-5 leading-7 text-[#ffffffd8]">
-          Where every tap turns into treasure. Ready to make your mark
-          with us? Let’s go!
+          Where every tap turns into treasure. Ready to make your mark with us?
+          Let’s go!
         </div>
       </div>
       <Button onClick={register} className="mt-auto mb-6">
