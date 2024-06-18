@@ -2,12 +2,11 @@ import { Suspense, useEffect } from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 
-import { TelegramProvider, useWebAppData, useWebAppInitData } from "./contexts";
+import { TelegramProvider, useWebAppData } from "./contexts";
 import { routerConfig } from "./routes";
 import { Loader } from "./components";
 
 import "./App.scss";
-import { paramsToObject } from "./utils";
 
 const router = createBrowserRouter(routerConfig);
 
