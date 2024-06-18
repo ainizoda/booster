@@ -263,7 +263,7 @@ export default function CrashPage() {
     getLastGameResults();
     getGames();
   }, []);
-  // console.log(games)
+  
   const copy = (hash?: string) => {
     if (!hash) return;
     navigator.clipboard.writeText(hash);
