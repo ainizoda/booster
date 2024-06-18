@@ -14,7 +14,6 @@ export default function RegisterPage() {
   const initData = useWebAppData() as any;
   const checkUsername = useDebounce(auth.checkNickname, 500);
   const navigate = useNavigate();
-  const webData = useWebAppData();
 
   const [data, setData] = useState<ICheckNickname>();
   const [loading, setLoading] = useState(false);
@@ -53,9 +52,6 @@ export default function RegisterPage() {
     }
   };
 
-  useEffect(() => {
-    alert("startparam: " + webData.start_param);
-  }, [webData]);
   return (
     <div className="flex flex-col justify-center items-center h-screen">
       <div className="mt-12 w-full">

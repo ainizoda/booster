@@ -86,6 +86,11 @@ export default function HomePage() {
       setTimeLeft(formatTime(status.time_left));
     }
   }, [status?.time_left]);
+  
+  const webData = useWebAppData();
+  useEffect(() => {
+    alert("startparam: " + webData.start_param);
+  }, [webData]);
 
   const formatTime = (seconds: number): string => {
     const hours = Math.floor(seconds / 3600);
