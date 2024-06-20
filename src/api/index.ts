@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig, InternalAxiosRequestConfig } from "axios";
+import axios, { InternalAxiosRequestConfig } from "axios";
 import { auth } from "./auth";
 import { toast } from "../lib";
 import { storage } from "../utils";

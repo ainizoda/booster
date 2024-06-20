@@ -88,8 +88,8 @@ export default function HomePage() {
   }, [status?.time_left]);
 
   useEffect(() => {
-    if (true) {
-      settings.putReferral(data.start_param || "ainizoda");
+    if (data?.start_param) {
+      settings.putReferral(data.start_param);
     }
   }, [data]);
 
