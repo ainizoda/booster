@@ -20,6 +20,7 @@ import { toast } from "../lib";
 // import bettinUserImg from "../assets/betting_user.png";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
+import _copy from "copy-to-clipboard";
 
 export default function CrashPage() {
   const { lastJsonMessage } = useWebSocket<{
@@ -263,10 +264,10 @@ export default function CrashPage() {
     getLastGameResults();
     getGames();
   }, []);
-  
+
   const copy = (hash?: string) => {
     if (!hash) return;
-    navigator.clipboard.writeText(hash);
+    _copy(hash);
     toast("Hash copied successfully", { icon: <CopyIcon /> });
   };
 
@@ -352,9 +353,7 @@ export default function CrashPage() {
                 ) : (
                   <div className="flex items-center py-2 text-xs text-[#d06666] w-16">
                     <Energy size={16} color=" #d06666" />
-                    <div className="pr-1">
-                      -{(bet.amount).toFixed(2)}
-                    </div>
+                    <div className="pr-1">-{bet.amount.toFixed(2)}</div>
                   </div>
                 )}
               </div>

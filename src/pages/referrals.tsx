@@ -4,6 +4,7 @@ import refferals from "../assets/reffferals.png";
 import { toast } from "../lib";
 import { useState } from "react";
 import cls from "classnames";
+import _copy from "copy-to-clipboard";
 import { useThrottle } from "../hooks";
 
 export default function ReferralsPage() {
@@ -12,7 +13,7 @@ export default function ReferralsPage() {
   const getReferral = useThrottle(() => {
     setLoading(true);
     settings.getReferral().then((res) => {
-      navigator.clipboard.writeText(res.data.referral_link);
+      _copy(res.data.referral_link);
       toast("Referral link copied");
       setLoading(false);
     });

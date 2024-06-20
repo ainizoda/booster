@@ -5,7 +5,6 @@ import { farming, settings } from "../api";
 import { Avatar, CrashIcon, EnergyIcon, EnergyXSIcon } from "../components";
 import { useWebAppData } from "../contexts";
 import { SpinnerSM } from "../components/icons/utils";
-import classNames from "classnames";
 import { toast } from "../lib";
 import { useNavigate } from "react-router";
 
@@ -114,7 +113,7 @@ export default function HomePage() {
             <EnergyIcon />
           </div>
           <div
-            className={classNames("font-orbitron font-bold text-ellipsis", {
+            className={cls("font-orbitron font-bold text-ellipsis", {
               "text-5xl": Number(balance?.length) < 8,
               "text-4xl": Number(balance?.length) === 8,
               "text-3xl": Number(balance?.length) > 8,
