@@ -1,5 +1,4 @@
-
-import axios, { InternalAxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig, InternalAxiosRequestConfig } from "axios";
 import { auth } from "./auth";
 import { toast } from "../lib";
 import { storage } from "../utils";
@@ -48,6 +47,9 @@ axiosInstance.interceptors.response.use(
       return axiosInstance(originalRequest);
     }
 
+    if (originalRequest?.ignoreMessage) {
+      return;
+    }
     // const errCode = error?.code?.toLowerCase() || "server error";
     const errDetail = error?.response?.data?.detail;
 

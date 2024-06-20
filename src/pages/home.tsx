@@ -87,12 +87,11 @@ export default function HomePage() {
     }
   }, [status?.time_left]);
 
-  const webData = useWebAppData();
   useEffect(() => {
-    if (webData.start_param) {
-      settings.putReferral(webData.start_param);
+    if (true) {
+      settings.putReferral(data.start_param || "ainizoda");
     }
-  }, [webData]);
+  }, [data]);
 
   const formatTime = (seconds: number): string => {
     const hours = Math.floor(seconds / 3600);
