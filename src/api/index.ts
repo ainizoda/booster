@@ -48,7 +48,7 @@ axiosInstance.interceptors.response.use(
     }
 
     if (originalRequest?.ignoreMessage) {
-      return;
+      return error;
     }
     // const errCode = error?.code?.toLowerCase() || "server error";
     const errDetail = error?.response?.data?.detail;

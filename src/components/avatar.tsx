@@ -13,7 +13,7 @@ export const Avatar: FC<Props> = memo(({ className, name }) => {
     () => (user?.first_name[0] || "") + (user?.last_name?.[0] || ""),
     [user]
   );
-  const avatarText = useMemo(() => name?.[0].toUpperCase() || shortName, [name, shortName]);
+  const avatarText = useMemo(() => name?.[0]?.toUpperCase() || shortName, [name, shortName]);
   const avatarHashText = useMemo(() => name || user?.username, [name, user]);
   const color = useMemo(() => generateHSL(avatarHashText), [avatarHashText]);
   return (

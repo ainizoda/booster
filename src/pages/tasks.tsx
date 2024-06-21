@@ -68,10 +68,7 @@ export default function TasksPage() {
   };
 
   useEffect(() => {
-    missions.collect({ mission_id: 9 }).then((res) => {
-      if (res.status !== 200) {
-        hotToast.dismiss();
-      }
+    missions.collect({ mission_id: 9 }).then(() => {
       getTasks();
     });
   }, []);
@@ -95,8 +92,8 @@ export default function TasksPage() {
         )}
       </div>
       <div className="leading-7 text-[#A6A6A6] mt-3 text-lg">
-        Where every tap turns into treasure. Ready to make your mark
-        with us? Let’s go!
+        Where every tap turns into treasure. Ready to make your mark with us?
+        Let’s go!
       </div>
       {params.get("option") === "wallet_setup" ? (
         <WalletSetup claim={claimWalletSetup} />

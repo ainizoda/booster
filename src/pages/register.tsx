@@ -3,12 +3,16 @@ import { useNavigate } from "react-router";
 import cls from "classnames";
 
 import { ICheckNickname, auth } from "../api";
-import { Button, CheckMarkIcon, ErrorIcon } from "../components";
-import { Avatar } from "../components";
-import { Input } from "../components";
+import {
+  Button,
+  CheckMarkIcon,
+  ErrorIcon,
+  Avatar,
+  Input,
+  SpinnerSM,
+} from "../components";
 import { useDebounce } from "../hooks/useDebounce";
 import { useWebAppData } from "../contexts";
-import { SpinnerSM } from "../components/icons/utils";
 
 export default function RegisterPage() {
   const initData = useWebAppData() as any;
