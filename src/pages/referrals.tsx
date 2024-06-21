@@ -17,13 +17,11 @@ export default function ReferralsPage() {
     settings
       .getReferral()
       .then((res) => {
-        alert(res.data.referral_link + 'suc');
-        copy(res.data.referral_link);
+        copy(res?.data?.referral_link);
         toast("Referral link copied");
         setLoading(false);
       })
-      .catch((e) => {
-        alert(e);
+      .catch(() => {
         setLoading(false);
       });
   }, 3000);
