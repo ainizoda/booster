@@ -23,7 +23,7 @@ export default function ReferralsPage() {
         setLoading(false);
       })
       .catch((e) => {
-        alert(JSON.stringify(e) + 'err');
+        alert(e);
         setLoading(false);
       });
   }, 3000);
