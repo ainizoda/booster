@@ -1,19 +1,21 @@
-import { settings } from "../api";
-import { ListIcon, SpinnerSM } from "../components";
-import refferals from "../assets/reffferals.png";
-import { toast } from "../lib";
 import { useState } from "react";
 import cls from "classnames";
-import _copy from "copy-to-clipboard";
+
+import { settings } from "../api";
+import { ListIcon, SpinnerSM } from "../components";
+import { toast } from "../lib";
 import { useThrottle } from "../hooks";
+import refferals from "../assets/reffferals.png";
+import { useCopy } from "../hooks/useCopy";
 
 export default function ReferralsPage() {
   const [loading, setLoading] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const copy = useCopy();
   const getReferral = useThrottle(() => {
     setLoading(true);
     settings.getReferral().then((res) => {
-      _copy(res.data.referral_link);
+      copy(res.data.referral_link);
       toast("Referral link copied");
       setLoading(false);
     });

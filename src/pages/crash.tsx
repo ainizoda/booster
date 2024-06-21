@@ -20,7 +20,7 @@ import { toast } from "../lib";
 // import bettinUserImg from "../assets/betting_user.png";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
-import _copy from "copy-to-clipboard";
+import { useCopy } from "../hooks/useCopy";
 
 export default function CrashPage() {
   const { lastJsonMessage } = useWebSocket<{
@@ -265,9 +265,11 @@ export default function CrashPage() {
     getGames();
   }, []);
 
-  const copy = (hash?: string) => {
+  const copy = useCopy();
+
+  const copyHash = (hash?: string) => {
     if (!hash) return;
-    _copy(hash);
+    copy(hash);
     toast("Hash copied successfully", { icon: <CopyIcon /> });
   };
 
@@ -304,7 +306,7 @@ export default function CrashPage() {
           Hash:{" "}
           <span
             className="text-xs break-words text-slate-400 hover:text-slate-300 cursor-pointer"
-            onClick={() => copy(selectedGame?.game_hash)}
+            onClick={() => copyHash(selectedGame?.game_hash)}
           >
             {selectedGame?.game_hash}
           </span>
@@ -443,7 +445,7 @@ export default function CrashPage() {
           <div>ROUND</div>
           <div>#{lastGameRound}</div>
         </div>
-        <div className="flex gap-2" onClick={() => copy(lastGame?.hash)}>
+        <div className="flex gap-2" onClick={() => copyHash(lastGame?.hash)}>
           <div>
             {lastGame?.hash.slice(0, 5)} ...{" "}
             {lastGame?.hash.slice(
