@@ -6,7 +6,7 @@ import { ListIcon, SpinnerSM } from "../components";
 import { toast } from "../lib";
 import { useThrottle } from "../hooks";
 import refferals from "../assets/reffferals.png";
-import { useCopy } from "../hooks/useCopy";
+import { useCopy } from "../hooks";
 
 export default function ReferralsPage() {
   const [loading, setLoading] = useState(false);
@@ -17,12 +17,14 @@ export default function ReferralsPage() {
     settings
       .getReferral()
       .then((res) => {
+        alert("success");
         alert(res.data.referral_link);
         copy(res.data.referral_link);
         toast("Referral link copied");
         setLoading(false);
       })
       .catch((e) => {
+        alert("err");
         alert(JSON.stringify(e));
         setLoading(false);
       });
