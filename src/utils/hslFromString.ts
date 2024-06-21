@@ -6,7 +6,7 @@ const normalizeHash = (hash: number, min: number, max: number) => {
   return Math.floor((hash % (max - min)) + min);
 };
 
-export const generateHSL = (str: string) => {
+export const generateHSL = (str: string = "") => {
   let hash = 0;
   for (let i = 0; i < str.length; i++) {
     hash = str.charCodeAt(i) + ((hash << 5) - hash);
