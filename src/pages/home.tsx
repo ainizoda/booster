@@ -12,7 +12,7 @@ export default function HomePage() {
   const data = useWebAppData() as any;
 
   const [status, setStatus] = useState<any>();
-  const [balance, setBalance] = useState<string>();
+  const [balance, setBalance] = useState<string>("");
   const [loading, setLoading] = useState({
     farming: false,
     balance: false,
