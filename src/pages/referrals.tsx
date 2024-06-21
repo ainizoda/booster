@@ -14,11 +14,18 @@ export default function ReferralsPage() {
   const copy = useCopy();
   const getReferral = useThrottle(() => {
     setLoading(true);
-    settings.getReferral().then((res) => {
-      copy(res.data.referral_link);
-      toast("Referral link copied");
-      setLoading(false);
-    });
+    settings
+      .getReferral()
+      .then((res) => {
+        alert(res.data.referral_link);
+        copy(res.data.referral_link);
+        toast("Referral link copied");
+        setLoading(false);
+      })
+      .catch((e) => {
+        alert(JSON.stringify(e));
+        setLoading(false);
+      });
   }, 3000);
   return (
     <div className="flex flex-col items-center h-full">
