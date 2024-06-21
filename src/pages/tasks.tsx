@@ -10,8 +10,6 @@ import {
 } from "../components";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-import hotToast from "react-hot-toast";
-
 export default function TasksPage() {
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(false);
