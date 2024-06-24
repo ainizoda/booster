@@ -23,7 +23,7 @@ export default function ReferralsPage() {
           toast("Referral link copied");
           return;
         }
-        toast("failed to copy referral link");
+        toast("failed to copy referral link", { error: true });
       })
       .catch((res) => {
         alert(JSON.stringify(res.error));
