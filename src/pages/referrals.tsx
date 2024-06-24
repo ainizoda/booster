@@ -1,5 +1,6 @@
 import { useState } from "react";
 import cls from "classnames";
+
 import { settings } from "../api";
 import { ListIcon, SpinnerSM } from "../components";
 import { toast } from "../lib";
@@ -10,31 +11,20 @@ export default function ReferralsPage() {
   const [loading, setLoading] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const copy = useCopy();
-
-  const copyLink = async (link: string) => {
+  const copyLink = (link: string) => {
     if (!link) return;
-    try {
-      alert(link);
-      await copy(link);
-      toast("Referral link copied");
-    } catch (error) {
-      alert(JSON.stringify(error)); // Log error for debugging
-    }
+    copy(link);
+    toast("Referral link copied");
   };
-
   const getReferral = () => {
     setLoading(true);
     settings
       .getReferral()
       .then((res) => {
-        const referralLink = res?.data?.referral_link;
-        if (referralLink) {
-          copyLink(referralLink);
-        }
+        copyLink(res?.data?.referral_link);
       })
-      .catch((error) => {
-        alert(JSON.stringify(error));
-        toast("Failed to copy referral link", { error: true });
+      .catch(() => {
+        toast("failed to copy referral link", { error: true });
       })
       .finally(() => {
         setLoading(false);
