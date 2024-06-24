@@ -15,6 +15,7 @@ export default function ReferralsPage() {
   const copy = useCopy();
   const copyLink = (link: string) => {
     if (!link) return;
+    alert(link);
     copy(link);
     toast("Referral link copied");
   };
