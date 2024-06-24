@@ -27,6 +27,7 @@ export const useCopy = () => {
         }
       }
     } catch (err) {
+      alert(JSON.stringify(err))
       toast("Failed to copy text", { error: true });
     }
   };
