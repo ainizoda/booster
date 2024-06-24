@@ -16,7 +16,7 @@ export default function ReferralsPage() {
     settings
       .getReferral()
       .then((res) => {
-        alert(JSON.stringify(res));
+        alert(JSON.stringify(res.data));
         if (res && res.data && typeof res.data.referral_link !== "undefined") {
           copy(res.data.referral_link);
           toast("Referral link copied");
