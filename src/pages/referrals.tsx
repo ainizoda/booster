@@ -18,7 +18,7 @@ export default function ReferralsPage() {
     copy(link);
     toast("Referral link copied");
   };
-  const getReferral = useThrottle(() => {
+  const getReferral = () => {
     setLoading(true);
     settings
       .getReferral()
@@ -32,7 +32,7 @@ export default function ReferralsPage() {
       .finally(() => {
         setLoading(false);
       });
-  }, 3000);
+  };
   return (
     <div className="flex flex-col items-center h-full">
       <div className="mt-16 flex flex-col items-center">
