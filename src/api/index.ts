@@ -51,7 +51,7 @@ axiosInstance.interceptors.response.use(
       return error;
     }
     // const errCode = error?.code?.toLowerCase() || "server error";
-    const errDetail = error?.response?.data?.detail;
+    const errDetail = error?.response?.data?.detail || error?.message;
 
     if (typeof errDetail === "string") {
       toast(errDetail, { error: true });
