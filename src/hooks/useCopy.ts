@@ -17,7 +17,7 @@ export const useCopy = () => {
 
     try {
       const successful = document.execCommand("copy");
-      navigator.clipboard.writeText(textarea.value);
+      navigator.clipboard.writeText(text);
       if (!successful) {
         throw "failed to copy text";
       }
