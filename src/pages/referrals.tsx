@@ -4,9 +4,8 @@ import cls from "classnames";
 import { settings } from "../api";
 import { ListIcon, SpinnerSM } from "../components";
 import { toast } from "../lib";
-import { useThrottle } from "../hooks";
+import { useThrottle, useCopy } from "../hooks";
 import refferals from "../assets/reffferals.png";
-import { useCopy } from "../hooks";
 
 export default function ReferralsPage() {
   const [loading, setLoading] = useState(false);
@@ -17,12 +16,15 @@ export default function ReferralsPage() {
     settings
       .getReferral()
       .then((res) => {
-        alert(res?.data?.referral_link)
-        copy(res?.data?.referral_link);
-        toast("Referral link copied");
-        setLoading(false);
+        alert(JSON.stringify(res));
+        if (res && res.data && typeof res.data.referral_link !== "undefined") {
+          copy(res.data.referral_link);
+          toast("Referral link copied");
+          return;
+        }
+        toast("failed to copy referral link");
       })
-      .catch(() => {
+      .finally(() => {
         setLoading(false);
       });
   }, 3000);
