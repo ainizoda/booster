@@ -1,31 +1,34 @@
 import { toast } from "../lib";
 
 export const useCopy = () => {
-  const copyTextToClipboard = (text: string) => {
-    const textarea = document.createElement("textarea");
-    textarea.value = text;
-
-    textarea.style.position = "fixed";
-    textarea.style.top = "0";
-    textarea.style.left = "0";
-
-    document.body.appendChild(textarea);
-    textarea.focus();
-    textarea.select();
-
-    textarea.setSelectionRange(0, 99999); // For mobile device
-
+  const copyTextToClipboard = async (text: string) => {
     try {
-      const successful = document.execCommand("copy");
-      navigator.clipboard.writeText(text);
-      if (!successful) {
-        throw "failed to copy text";
+      // Use the Clipboard API if available
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(text);
+      } else {
+        // Fallback for older browsers
+        const textarea = document.createElement("textarea");
+        textarea.value = text;
+        textarea.style.position = "fixed"; // Avoid scrolling to the bottom of the page
+        textarea.style.top = "0";
+        textarea.style.left = "0";
+        textarea.style.opacity = "0"; // Invisible but still selectable
+
+        document.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+
+        const successful = document.execCommand("copy");
+        document.body.removeChild(textarea);
+
+        if (!successful) {
+          throw new Error("Failed to copy text");
+        }
       }
     } catch (err) {
-      toast(err as string, { error: true });
+      toast("Failed to copy text", { error: true });
     }
-
-    document.body.removeChild(textarea);
   };
 
   return copyTextToClipboard;
