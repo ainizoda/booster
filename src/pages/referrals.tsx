@@ -4,7 +4,7 @@ import cls from "classnames";
 import { settings } from "../api";
 import { ListIcon, SpinnerSM } from "../components";
 import { toast } from "../lib";
-import { useThrottle, useCopy } from "../hooks";
+import { useCopy } from "../hooks";
 import refferals from "../assets/reffferals.png";
 import { createPortal } from "react-dom";
 
