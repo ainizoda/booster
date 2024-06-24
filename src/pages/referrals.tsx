@@ -13,21 +13,21 @@ export default function ReferralsPage() {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [data, setData] = useState<string | null>(null);
   const copy = useCopy();
+  const copyLink = (link: string) => {
+    if (!link) return;
+    copy(link);
+    toast("Referral link copied");
+  };
   const getReferral = useThrottle(() => {
     setLoading(true);
     settings
       .getReferral()
       .then((res) => {
         setData(JSON.stringify(res));
-        if (res && res.data && typeof res.data.referral_link !== "undefined") {
-          copy(res.data.referral_link);
-          toast("Referral link copied");
-          return;
-        }
-        toast("failed to copy referral link", { error: true });
+        copyLink(res?.data?.referral_link);
       })
-      .catch((res) => {
-        alert(JSON.stringify(res.error));
+      .catch(() => {
+        toast("failed to copy referral link", { error: true });
       })
       .finally(() => {
         setLoading(false);
