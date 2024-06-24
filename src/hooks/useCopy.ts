@@ -5,7 +5,11 @@ export const useCopy = () => {
     try {
       // Use the Clipboard API if available
       if (navigator.clipboard && navigator.clipboard.writeText) {
-        await navigator.clipboard.writeText(text);
+        try {
+          await navigator.clipboard.writeText(text);
+        } catch {
+          alert("sdf");
+        }
       } else {
         // Fallback for older browsers
         const textarea = document.createElement("textarea");
@@ -27,7 +31,7 @@ export const useCopy = () => {
         }
       }
     } catch (err) {
-      alert(JSON.stringify(err))
+      alert(JSON.stringify(err));
       toast("Failed to copy text", { error: true });
     }
   };
