@@ -27,7 +27,7 @@ export const useCopy = () => {
         }
       }
     } catch (err) {
-      toast(err as string, { error: true });
+      toast("Failed to copy text", { error: true });
     }
   };
 
