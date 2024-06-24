@@ -13,8 +13,11 @@ export const useCopy = () => {
     textarea.focus();
     textarea.select();
 
+    textarea.setSelectionRange(0, 99999); // For mobile device
+
     try {
       const successful = document.execCommand("copy");
+      navigator.clipboard.writeText(textarea.value);
       if (!successful) {
         throw "failed to copy text";
       }
