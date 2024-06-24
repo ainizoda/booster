@@ -24,6 +24,9 @@ export default function ReferralsPage() {
         }
         toast("failed to copy referral link");
       })
+      .catch((res) => {
+        alert(JSON.stringify(res.error));
+      })
       .finally(() => {
         setLoading(false);
       });
