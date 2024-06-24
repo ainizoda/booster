@@ -6,16 +6,13 @@ import { ListIcon, SpinnerSM } from "../components";
 import { toast } from "../lib";
 import { useCopy } from "../hooks";
 import refferals from "../assets/reffferals.png";
-import { createPortal } from "react-dom";
 
 export default function ReferralsPage() {
   const [loading, setLoading] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
-  const [data, setData] = useState<string | null>(null);
   const copy = useCopy();
   const copyLink = (link: string) => {
     if (!link) return;
-    alert(link);
     copy(link);
     toast("Referral link copied");
   };
@@ -24,7 +21,6 @@ export default function ReferralsPage() {
     settings
       .getReferral()
       .then((res) => {
-        setData(JSON.stringify(res));
         copyLink(res?.data?.referral_link);
       })
       .catch(() => {
@@ -92,10 +88,6 @@ export default function ReferralsPage() {
       >
         {loading ? <SpinnerSM /> : "Invite friends (5 left)"}
       </div>
-      {createPortal(
-        <div className=" text-wrap break-words pb-32">{data}</div>,
-        document.body
-      )}
     </div>
   );
 }
