@@ -2,9 +2,9 @@ import { useCallback } from "react";
 import { toast } from "../lib";
 
 export const useCopy = () => {
-  const isIOS = () => navigator.userAgent.match(/ipad|iphone|Mac OS/i);
+  const isSafari = () => navigator.userAgent.match(/ipad|iphone|Mac OS/i);
   const copyTextToClipboard = useCallback(async (text: string) => {
-    text = text.replace("https://", "");
+    text = `link - ${text.replace("https://", "")}`;
     try {
       if (navigator.clipboard && navigator.clipboard.writeText) {
         await navigator.clipboard.writeText(text);
@@ -22,7 +22,7 @@ export const useCopy = () => {
       let range, selection: Selection | null;
       textarea.focus();
 
-      if (isIOS()) {
+      if (isSafari()) {
         range = document.createRange();
         range.selectNodeContents(textarea);
         selection = window.getSelection();
@@ -40,7 +40,6 @@ export const useCopy = () => {
         throw new Error("Failed to copy text");
       }
     } catch (err) {
-      alert(JSON.stringify(err));
       toast("Failed to copy text", { error: true });
     }
   }, []);
