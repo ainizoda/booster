@@ -2,7 +2,7 @@ import { toast } from "../lib";
 
 export const useCopy = () => {
   const copyTextToClipboard = async (text: string) => {
-    text = encodeURI(text);
+    text = text.replace("https://", "");
     try {
       // Use the Clipboard API if available
       if (navigator.clipboard && navigator.clipboard.writeText) {
