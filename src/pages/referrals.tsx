@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import cls from "classnames";
+import { TelegramShareButton } from "react-share";
 
 import { settings } from "../api";
 import { ListIcon, SpinnerSM } from "../components";
@@ -10,6 +11,7 @@ import refferals from "../assets/reffferals.png";
 export default function ReferralsPage() {
   const [loading, setLoading] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [link, setLink] = useState<string>();
   const copy = useCopy();
   const copyLink = (link: string) => {
     if (!link) return;
@@ -21,7 +23,7 @@ export default function ReferralsPage() {
     settings
       .getReferral()
       .then((res) => {
-        copyLink(res?.data?.referral_link);
+        setLink(res?.data?.referral_link);
       })
       .catch(() => {
         toast("failed to copy referral link", { error: true });
@@ -30,6 +32,9 @@ export default function ReferralsPage() {
         setLoading(false);
       });
   };
+  useEffect(() => {
+    getReferral();
+  }, []);
   return (
     <div className="flex flex-col items-center h-full">
       <div className="mt-16 flex flex-col items-center">
@@ -76,18 +81,19 @@ export default function ReferralsPage() {
           </div>
         </div>
       </div>
-      <div
-        onClick={getReferral}
+      <TelegramShareButton
+        disabled={loading}
+        url={link!}
         className={cls(
-          "mt-auto mb-5 text-center p-3 w-full rounded-md text-black",
+          "mt-auto mb-5 text-center !p-3 w-full rounded-md !text-black",
           {
-            "bg-white": !loading,
-            "bg-[#232323] flex justify-center": loading,
+            "!bg-white": !loading,
+            "!bg-[#232323] flex justify-center": loading,
           }
         )}
       >
         {loading ? <SpinnerSM /> : "Invite friends (5 left)"}
-      </div>
+      </TelegramShareButton>
     </div>
   );
 }
