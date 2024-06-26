@@ -4,7 +4,9 @@ import { toast } from "../lib";
 export const useCopy = () => {
   const isSafari = () => navigator.userAgent.match(/ipad|iphone|Mac OS/i);
   const copyTextToClipboard = useCallback(async (text: string) => {
-    text = `link - ${text.replace("https://", "")}`;
+    if (text.includes("https://")) {
+      text = `link - ${text.replace("https://", "")}`;
+    }
     try {
       if (navigator.clipboard && navigator.clipboard.writeText) {
         await navigator.clipboard.writeText(text);
