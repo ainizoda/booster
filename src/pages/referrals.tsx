@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import cls from "classnames";
 
 import { settings } from "../api";
@@ -11,7 +11,8 @@ export default function ReferralsPage() {
   const [loading, setLoading] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const copy = useCopy();
-  const copyLink = (link: string) => {
+  const [link, setLink] = useState<string>();
+  const copyLink = (link?: string) => {
     if (!link) return;
     copy(link);
     toast("Referral link is copied");
@@ -21,7 +22,7 @@ export default function ReferralsPage() {
     settings
       .getReferral()
       .then((res) => {
-        copyLink(res?.data?.referral_link);
+        setLink(res?.data?.referral_link);
       })
       .catch(() => {
         toast("failed to copy referral link", { error: true });
@@ -30,6 +31,9 @@ export default function ReferralsPage() {
         setLoading(false);
       });
   };
+  useEffect(() => {
+    getReferral();
+  }, []);
   return (
     <div className="flex flex-col items-center h-full">
       <div className="mt-16 flex flex-col items-center">
@@ -77,7 +81,7 @@ export default function ReferralsPage() {
         </div>
       </div>
       <div
-        onClick={getReferral}
+        onClick={() => copyLink(link)}
         className={cls(
           "mt-auto mb-5 text-center p-3 w-full rounded-md text-black",
           {
