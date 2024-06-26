@@ -20,7 +20,7 @@ import { toast } from "../lib";
 // import bettinUserImg from "../assets/betting_user.png";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { useCopy } from "../hooks/useCopy";
+import { useCopy } from "../hooks";
 
 export default function CrashPage() {
   const { lastJsonMessage } = useWebSocket<{

@@ -14,7 +14,7 @@ export default function ReferralsPage() {
   const copyLink = (link: string) => {
     if (!link) return;
     copy(link);
-    toast("Referral link copied");
+    toast("Referral link is copied");
   };
   const getReferral = () => {
     setLoading(true);

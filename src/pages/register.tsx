@@ -11,7 +11,7 @@ import {
   Input,
   SpinnerSM,
 } from "../components";
-import { useDebounce } from "../hooks/useDebounce";
+import { useDebounce } from "../hooks";
 import { useWebAppData } from "../contexts";
 
 export default function RegisterPage() {
