@@ -5,19 +5,12 @@ import { TelegramShareButton } from "react-share";
 import { settings } from "../api";
 import { ListIcon, SpinnerSM } from "../components";
 import { toast } from "../lib";
-import { useCopy } from "../hooks";
 import refferals from "../assets/reffferals.png";
 
 export default function ReferralsPage() {
   const [loading, setLoading] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
   const [link, setLink] = useState<string>();
-  const copy = useCopy();
-  const copyLink = (link: string) => {
-    if (!link) return;
-    copy(link);
-    toast("Referral link copied");
-  };
   const getReferral = () => {
     setLoading(true);
     settings
