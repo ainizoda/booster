@@ -42,6 +42,7 @@ export const useCopy = () => {
         throw new Error("Failed to copy text");
       }
     } catch (err) {
+      alert(err?.toString());
       toast("Failed to copy text", { error: true });
     }
   }, []);
