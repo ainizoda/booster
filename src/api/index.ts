@@ -19,8 +19,16 @@ axiosInstance.interceptors.request.use(async (req) => {
   if (
     !(req as InternalAxiosRequestConfig & { ignoreToken: boolean }).ignoreToken
   ) {
-    const token = storage.get("access_token");
-    req.headers.Authorization = token ? `Bearer ${token}` : "";
+    let token;
+    try {
+      token = storage.get("access_token");
+      req.headers.Authorization = token ? `Bearer ${token}` : "";
+    } catch {
+      await auth.login({ data_check_string: Telegram.WebApp.initData });
+
+      token = storage.get("access_token");
+      req.headers.Authorization = token ? `Bearer ${token}` : "";
+    }
   }
   return req;
 });
@@ -40,7 +48,7 @@ axiosInstance.interceptors.response.use(
       originalRequest._retry = true;
 
       const oldToken = storage.get("refresh_token");
-      const newAccessToken = await auth.refreshToken(oldToken);
+      const newAccessToken = await auth.refreshToken(oldToken || "");
       storage.set("access_token", newAccessToken);
       originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
 
