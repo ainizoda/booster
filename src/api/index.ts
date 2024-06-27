@@ -25,6 +25,8 @@ axiosInstance.interceptors.request.use((req) => {
       req.headers.Authorization = token ? `Bearer ${token}` : "";
     } catch {
       auth.login({ data_check_string: Telegram.WebApp.initData });
+      alert(Telegram.WebApp.initData);
+      return axiosInstance(req);
     }
   }
   return req;
