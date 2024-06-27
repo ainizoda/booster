@@ -24,7 +24,7 @@ axiosInstance.interceptors.request.use((req) => {
       token = storage.get("access_token");
       req.headers.Authorization = token ? `Bearer ${token}` : "";
     } catch {
-      window.location.href = "/";
+      auth.login({ data_check_string: Telegram.WebApp.initData });
     }
   }
   return req;
