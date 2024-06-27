@@ -33,6 +33,7 @@ export const AuthChecker: FC<RenderProps | NavigateProps> = ({
 
       if (res?.data?.registered) {
         await auth.login({ data_check_string: initData });
+        alert();
         return;
       }
       navigate("/welcome");
