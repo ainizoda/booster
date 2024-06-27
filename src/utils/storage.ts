@@ -7,7 +7,8 @@ export const storage: Storage = {
   get(key) {
     const val = sessionStorage.getItem(key);
     if (val === null) {
-      throw new Error(`storage: value with key \`${key}\` not found`);
+      // throw new Error(`storage: value with key \`${key}\` not found`);
+      return
     }
     return val;
   },
