@@ -32,7 +32,9 @@ export const AuthChecker: FC<RenderProps | NavigateProps> = ({
       const res = await auth.isRegistered(data?.user?.id);
 
       if (res?.data?.registered) {
-        await auth.login({ data_check_string: initData });
+        alert(initData);
+        const data = await auth.login({ data_check_string: initData });
+        alert(JSON.stringify(data.data));
         return;
       }
       navigate("/welcome");
@@ -42,7 +44,6 @@ export const AuthChecker: FC<RenderProps | NavigateProps> = ({
   }
 
   useEffect(() => {
-    alert(); 
     checkToken(data);
   }, [data]);
 
