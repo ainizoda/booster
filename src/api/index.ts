@@ -19,8 +19,13 @@ axiosInstance.interceptors.request.use((req) => {
   if (
     !(req as InternalAxiosRequestConfig & { ignoreToken: boolean }).ignoreToken
   ) {
-    const token = storage.get("access_token");
-    req.headers.Authorization = token ? `Bearer ${token}` : "";
+    let token;
+    try {
+      token = storage.get("access_token");
+      req.headers.Authorization = token ? `Bearer ${token}` : "";
+    } catch {
+      window.location.href = "/";
+    }
   }
   return req;
 });
