@@ -46,9 +46,9 @@ axiosInstance.interceptors.response.use(
 
     if (responseStatus === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
-
+      await auth.login({ data_check_string: Telegram.WebApp.initData });
       const oldToken = storage.get("refresh_token");
-      const newAccessToken = await auth.refreshToken(oldToken || "");
+      const newAccessToken = await auth.refreshToken(oldToken);
       storage.set("access_token", newAccessToken);
       originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
 
