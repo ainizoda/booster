@@ -15,7 +15,7 @@ const axiosInstance = axios.create({
   baseURL: apiURL,
 });
 
-axiosInstance.interceptors.request.use((req) => {
+axiosInstance.interceptors.request.use(async (req) => {
   if (
     !(req as InternalAxiosRequestConfig & { ignoreToken: boolean }).ignoreToken
   ) {
@@ -24,8 +24,10 @@ axiosInstance.interceptors.request.use((req) => {
       token = storage.get("access_token");
       req.headers.Authorization = token ? `Bearer ${token}` : "";
     } catch {
-      auth.login({ data_check_string: Telegram.WebApp.initData });
-      return req;
+      await auth.login({ data_check_string: Telegram.WebApp.initData });
+
+      token = storage.get("access_token");
+      req.headers.Authorization = token ? `Bearer ${token}` : "";
     }
   }
   return req;
