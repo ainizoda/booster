@@ -1,5 +1,5 @@
 interface Storage<V = string> {
-  get(key: string): V;
+  get(key: string): V | null;
   set(key: string, value: V): void;
 }
 
@@ -8,7 +8,7 @@ export const storage: Storage = {
     const val = sessionStorage.getItem(key);
     if (val === null) {
       // throw new Error(`storage: value with key \`${key}\` not found`);
-      return
+      return val
     }
     return val;
   },
