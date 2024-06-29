@@ -41,6 +41,7 @@ axiosInstance.interceptors.response.use(
 
       const oldToken = storage.get("refresh_token");
       const newAccessToken = await auth.refreshToken(oldToken);
+
       storage.set("access_token", newAccessToken);
       originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
 
