@@ -10,11 +10,19 @@ type Props = {
 export const Avatar: FC<Props> = memo(({ className, name }) => {
   const appData = useWebAppData() as any;
   const shortName = useMemo(
-    () => (appData?.user?.first_name[0] || "") + (appData?.user?.last_name?.[0] || ""),
+    () =>
+      (appData?.user?.first_name[0] || "") +
+      (appData?.user?.last_name?.[0] || ""),
     [appData]
   );
-  const avatarText = useMemo(() => name?.[0]?.toUpperCase() || shortName, [name, shortName]);
-  const avatarHashText = useMemo(() => name || appData?.user?.username, [name, appData]);
+  const avatarText = useMemo(
+    () => name?.[0]?.toUpperCase() || shortName,
+    [name, shortName]
+  );
+  const avatarHashText = useMemo(
+    () => name || appData?.user?.username,
+    [name, appData]
+  );
   const color = useMemo(() => generateHSL(avatarHashText), [avatarHashText]);
   return (
     <div

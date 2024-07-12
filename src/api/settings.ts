@@ -4,9 +4,9 @@ import { fetcher } from ".";
 const getReferral = () => fetcher.get("/user/settings/referral_link");
 const putReferral = (link: string) =>
   fetcher.put(
-    "/user/settings/referral",
+    "/user/settings/referrer",
     {
-      encoded_username: encodeURI(link),
+      encoded_username: encodeURI(link.replace("ref_", "")),
     },
     { ignoreMessage: true } as AxiosRequestConfig
   );
